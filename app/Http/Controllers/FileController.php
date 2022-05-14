@@ -13,7 +13,7 @@ class FileController extends Controller
 {
     public function import(Request $request){
         $request->validate([
-            'patient_id' => 'required|integer',
+            // 'patient_id' => 'required|integer',
             'file' => 'required',
         ]);
         try {
@@ -23,8 +23,9 @@ class FileController extends Controller
                 DB::beginTransaction();
                 $onlyName = explode(".",$file->getClientOriginalName())[0];
                 $fileName = $onlyName.'-'. Carbon::now()->format('ymd').'.'. $file->getClientOriginalExtension();
+                // namatraining-id-tanggal
                 $filePath = './newFile';
-                dd($fileName);
+                // dd($fileName);
                 $trainPath=TrainingPath::create([
                     'patient_id' => 1,
                     'path_name' => $filePath.'/'.$fileName,

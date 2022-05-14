@@ -75,18 +75,7 @@ const graph = new Chart(chart, {
 })
 
 function drawChart(X=[],Y=[]){
-    // new Chart(chart, {
-    //     type: 'line',
-    //     data: {
-    //         labels: X,
-    
-    //         datasets: Y,
-    //     },
-    //     option: {
-    //         responsive: true,
-    //     }
-    // })
-    // graph.destroy();
+   
     graph.data.labels = X;
     graph.data.datasets = Y;
     graph.update();

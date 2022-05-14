@@ -109,7 +109,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                   Import File
                 </button>
-                <button type="button" class="btn btn-primary me-2" onclick="showData()">Show Data</button>
+                <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
                 <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
               
                 {{-- Modal Import File --}}
@@ -124,6 +124,13 @@
                     
                     <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
                       @csrf
+                      <select class="form-select" aria-label="pasien Select" name="type" required>
+                        <option value="" selected>---Jenis Training---</option>
+                        <option value="1">Arus</option>
+                        <option value="2">Kecepatan</option>
+                        <option value="3">Trayektori</option>
+                      </select>
+                      <br>
                       <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
                         <option value="" selected>---Pasien---</option>
                         <option value="1">Adi</option>
@@ -146,6 +153,40 @@
               </div>
             </div>
             {{-- Modal Import File End --}}
+
+            {{-- Modal Show Data --}}
+            <div class="modal" id="modalShowData" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Show File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
+                      @csrf
+                      <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
+                        <option value="" selected>---Pasien---</option>
+                        <option value="1">Adi</option>
+                        <option value="2">Budi</option>
+                        <option value="3">Arif</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                      <br>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{-- Modal Show Data End --}}
 
             <div class="card h-100">
               <div class="card-header">

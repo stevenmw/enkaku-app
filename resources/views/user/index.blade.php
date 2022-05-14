@@ -5,6 +5,16 @@
 <main class="mt-5 pt-3">
   <div class="container-fluid">
     <div class="row">
+      @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+      @endif  
+      @if (session('error'))
+      <div class="alert alert-danger">
+          {{ session('error') }}
+      </div>
+    @endif  
       <div class="col-md-12">
         <h4>Welcome Home Steven</h4>
       </div>
@@ -63,6 +73,15 @@
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
+        <form action="/import-file" method="POST" enctype="multipart/form-data">
+          @csrf
+          <input type="file" name="file" id="file" accept=".txt">
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary me-2">import file</button>
+            <button type="button" class="btn btn-primary me-2" onclick="showData">Show Data</button>
+            <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+          </div>
+        </form>
         <div class="card h-100">
           <div class="card-header">
             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>

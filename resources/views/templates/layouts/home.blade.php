@@ -24,6 +24,7 @@
     @yield('page_content')
     <!-- offcanvas -->
     
+<<<<<<< HEAD
     <main class="mt-5 pt-3">
       <div class="container-fluid">
         <div class="row">
@@ -712,6 +713,8 @@
       </div>
     </main>
     
+=======
+>>>>>>> 0f64ff4b23da77cb1351ef4ca629ab835116c4a1
     <script src="./js/dashboard/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

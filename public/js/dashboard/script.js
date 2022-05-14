@@ -49,7 +49,7 @@
 const chart = document.querySelector("#chart").getContext('2d');
 
 // create a new instance
-new Chart(chart, {
+const graph = new Chart(chart, {
     type: 'line',
     data: {
         labels: ['23:30:18.184', '23:30:18.323', '23:30:18.416', '23:30:18.555', '23:30:18.650', '23:30:18.744', '23:30:18.883', '23:30:18.976', '23:30:19.115', '23:30:19.209', '23:30:19.302', '23:30:19.442'],
@@ -73,3 +73,48 @@ new Chart(chart, {
         responsive: true
     }
 })
+
+function drawChart(X=[],Y=[]){
+    // new Chart(chart, {
+    //     type: 'line',
+    //     data: {
+    //         labels: X,
+    
+    //         datasets: Y,
+    //     },
+    //     option: {
+    //         responsive: true,
+    //     }
+    // })
+    // graph.destroy();
+    graph.data.labels = X;
+    graph.data.datasets = Y;
+    graph.update();
+}
+
+function showData(){
+    axios.get('/process-file')
+    .then(function(response){
+        yAxis = [
+            {
+                label: 'Elbow',
+                data: response.data.elbow,
+                borderColor: 'red',
+                borderWidth: 0.5,
+                backgroundColor:'red'
+            },
+            {
+                label: 'Shoulder',
+                data: response.data.shoulder,
+                borderColor: 'green',
+                borderWidth: 0.5,
+                backgroundColor:'green'
+            }
+        ];
+        xAxis = response.data.realTime;
+        drawChart(xAxis,yAxis);
+        // console.log(response.data);
+    }).catch(function(err){
+        console.log(err);
+    });
+}

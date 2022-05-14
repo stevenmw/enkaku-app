@@ -37,6 +37,16 @@
               {{ session('error') }}
           </div>
         @endif  
+        {{-- form validation --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
           <div class="col-md-12">
             <h4>Welcome Home Steven</h4>
           </div>
@@ -94,16 +104,49 @@
           </div> --}}
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <form action="/import-file" method="POST" enctype="multipart/form-data">
-              @csrf
-              <input type="file" name="file" id="file" accept=".txt">
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary me-2">import file</button>
-                <button type="button" class="btn btn-primary me-2" onclick="showData">Show Data</button>
+          <div class="col-12 mb-3">
+              
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                  Import File
+                </button>
+                <button type="button" class="btn btn-primary me-2" onclick="showData()">Show Data</button>
                 <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+              
+                {{-- Modal Import File --}}
+            <div class="modal" id="importModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Import File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
+                      @csrf
+                      <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
+                        <option value="" selected>---Pasien---</option>
+                        <option value="1">Adi</option>
+                        <option value="2">Budi</option>
+                        <option value="3">Arif</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                      <br>
+                      <input type="file" name="file" id="file" accept=".txt">
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                  </form>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
+            {{-- Modal Import File End --}}
+
             <div class="card h-100">
               <div class="card-header">
                 <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
@@ -630,6 +673,7 @@
     
     <script src="./js/dashboard/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/dashboard/jquery-3.5.1.js"></script>
     <script src="./js/dashboard/jquery.dataTables.min.js"></script>
     <script src="./js/dashboard/dataTables.bootstrap5.min.js"></script>

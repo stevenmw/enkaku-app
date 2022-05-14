@@ -51,14 +51,14 @@
             <li><a class="dropdown-item" href="#">My Profiles</a></li>
             <li><a class="dropdown-item" href="/">Settings</a></li>
             <li>
-              {{-- <a id="logout-form" class="dropdown-item" href="/" onclick="return logout(event)">
-                Sign Out
-              </a> --}}
-              <a id="logout-form" class="dropdown-item" href="/logout" onclick="return logout(event);">
-                <span class="text-danger">
-                   <i class="fa fa-fw fa-sign-out"></i>Logout
-                </span>
-              </a>
+              <form action="/logout" method="POST">
+                @csrf
+                <a class="dropdown-item" href="/login" onclick="return logout(event);">
+                  <span class="text-danger">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout
+                  </span>
+                </a>
+              </form>
             </li>
           </ul>
         </li>
@@ -67,12 +67,4 @@
   </div>
 </nav>
 
-<script type="text/javascript">
-  function logout(event){
-          event.preventDefault();
-          var check = confirm("Do you really want to logout?");
-          if(check){ 
-             document.getElementById('logout-form').submit();
-          }
-   }
-</script>
+<script src="./js/logout.js"></script>

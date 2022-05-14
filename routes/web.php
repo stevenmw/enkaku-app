@@ -17,12 +17,16 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/main', function () {
     return view('main');
 });
+
+// Route::get('/user', function () {
+//     return view('user.index');
+// });
 
 // Route::get('/home', function () {
 //     return view('templates.layouts.home');
@@ -32,7 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);

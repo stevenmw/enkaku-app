@@ -72,16 +72,115 @@
       </div> --}}
     </div>
     <div class="row">
-      <div class="col-md-6 mb-3">
-        <form action="/import-file" method="POST" enctype="multipart/form-data">
-          @csrf
-          <input type="file" name="file" id="file" accept=".txt">
-          <div class="btn-group">
-            <button type="submit" class="btn btn-primary me-2">import file</button>
-            <button type="button" class="btn btn-primary me-2" onclick="showData">Show Data</button>
-            <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+      <div class="row">
+        <div class="col-12 mb-3">
+            
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                Import File
+              </button>
+              <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
+              <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+            
+              {{-- Modal Import File --}}
+          <div class="modal" id="importModal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Import File</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
+                    @csrf
+                    <select class="form-select" aria-label="pasien Select" name="type" required>
+                      <option value="" selected>---Jenis Training---</option>
+                      <option value="1">Arus</option>
+                      <option value="2">Kecepatan</option>
+                      <option value="3">Trayektori</option>
+                    </select>
+                    <br>
+                    <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
+                      <option value="" selected>---Pasien---</option>
+                      <option value="1">Adi</option>
+                      <option value="2">Budi</option>
+                      <option value="3">Arif</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Please choose a username.
+                    </div>
+                    <br>
+                    <input type="file" name="file" id="file" accept=".txt">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Import</button>
+                </form>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
+          {{-- Modal Import File End --}}
+
+          {{-- Modal Show Data --}}
+          <div class="modal" id="modalShowData" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Show File</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
+                    @csrf
+                    <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
+                      <option value="" selected>---Pasien---</option>
+                      <option value="1">Adi</option>
+                      <option value="2">Budi</option>
+                      <option value="3">Arif</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Please choose a username.
+                    </div>
+                    <br>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- Modal Show Data End --}}
+
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Velocity Chart
+            </div>
+            <div class="card-body">
+              {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
+              <canvas id="chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart
+            </div>
+            <div class="card-body">
+              {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
+              <canvas id="chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="card h-100">
           <div class="card-header">
             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>

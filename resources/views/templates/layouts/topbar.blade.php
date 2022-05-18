@@ -36,7 +36,7 @@
         </div> --}}
       </form>
       <ul class="navbar-nav">
-        <a class="navbar-brand me-auto ms-lg-0 ms-3">Steven M.W</a>
+        <a class="navbar-brand me-auto ms-lg-0 ms-3">{{auth()->user()->name}}</a>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle ms-2"

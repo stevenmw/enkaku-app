@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Account extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password','confirm_password'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'confirm_password',
     ];
 
     /**
@@ -37,4 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function admin(){
+        return $this->belongsTo(Admin::class,'id','account_id');
+    }
+
+    public function doctor(){
+        return $this->belongsTo(Doctor::class,'id','account_id');
+    }
+
+    public function patient(){
+        return $this->belongsTo(Patient::class,'id','account_id');
+    }
 }

@@ -36,7 +36,7 @@
         </div> --}}
       </form>
       <ul class="navbar-nav">
-        <a class="navbar-brand me-auto ms-lg-0 ms-3">Steven M.W</a>
+        <a class="navbar-brand me-auto ms-lg-0 ms-3">{{ auth()->user()->name }}</a>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle ms-2"
@@ -48,16 +48,19 @@
             <i class="bi bi-person-fill"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">My Profiles</a></li>
+            <li><a class="dropdown-item" href="/profile">My Profiles</a></li>
             <li><a class="dropdown-item" href="/">Settings</a></li>
             <li>
               <form action="/logout" method="POST">
                 @csrf
-                <a class="dropdown-item" href="/login" onclick="return logout(event);">
+                {{-- <a class="dropdown-item" href="/login" onclick="return logout(event);">
                   <span class="text-danger">
                     <i class="fa fa-fw fa-sign-out"></i>Logout
                   </span>
-                </a>
+                </a> --}}
+                <button type="submit" class="dropdown-item" onclick="return logout(event);">
+                  <i class="fa fa-fw fa-sign-out"></i> Logout
+                </button>
               </form>
             </li>
           </ul>

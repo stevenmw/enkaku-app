@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
     <link rel="stylesheet" href="css/home.css">
 </head>
@@ -21,7 +21,7 @@
 <header class="header">
 
     {{-- <a href="#" class="logo"> <i class="fas fa-clinic-medical"></i> Enkaku. </a> --}}
-    <a href="#home" class="logo"> <i class="fas fa-hand-holding-heart"></i> Enkaku </a>
+    <a href="/" class="logo"> <i class="fas fa-hand-holding-heart"></i> Enkaku </a>
     {{-- <span class="material-icons-sharp">medical_information</span> --}}
     {{-- <img src="./images/Logo 2 (1).svg" class="logo"> --}}
 
@@ -35,7 +35,7 @@
         <a href="#review">review</a>
         {{-- <a href="#blogs">blogs</a> --}}
         <a href="#review" type="hidden"></a>
-        <div class="dropdown">
+        {{-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Profile
             </button>
@@ -44,7 +44,7 @@
                 <li><a href='#' class="dropdown-item" href="#">Settings</a></li>
                 <li><a href='#' class="dropdown-item" href="#">Logut</a></li>
             </ul>
-        </div>
+        </div> --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </nav>
     <div id="menu-btn" class="fas fa-bars"></div>

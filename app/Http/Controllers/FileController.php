@@ -50,15 +50,30 @@ class FileController extends Controller
         foreach (TrainingPath::arrayType as $value) {
             $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$value)->first(); 
             if($temp){
-                $data["$value"] = $this->processTrayektoriFile($temp->path_name);
+                if($value == TrainingPath::trayektori){
+                    $data["$value"] = $this->processTrayektoriFile($temp->path_name);
+                }
+                if($value == TrainingPath::arus){
+                    $data["$value"] = $this->processArusFile($temp);
+                }
+                if($value == TrainingPath::kecepatan){
+                    $data["$value"] = $this->processKecepatanFile($temp);
+                }
             }   
             
         }
-        
         $response = [
             'trayektori'=> $data,
         ];
         return response()->json($data);
+    }
+
+    public function processArusFile($pathFile){
+        return null;
+    }
+
+    public function processKecepatanFile($pathFile){
+        return null;
     }
 
     public function processTrayektoriFile($pathFile){

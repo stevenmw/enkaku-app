@@ -34,7 +34,7 @@ Route::get('/main', function () {
 // });
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::post('/import-file',[FileController::class,'import']);
-Route::get('/process-file',[FileController::class,'processFile']);
+Route::post('/process-file',[FileController::class,'processFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);

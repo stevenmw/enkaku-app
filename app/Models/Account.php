@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,5 +49,35 @@ class Account extends Authenticatable
 
     public function patient(){
         return $this->belongsTo(Patient::class,'id','account_id');
+    }
+
+    public function scopeIsAdmin($query){
+       $query = $query->whereHas('admin', function (Builder $quer){
+            $quer->where('account_id',auth()->user()->id);
+       })->first();
+       if($query){
+           return true;
+       }
+       return false;
+    }
+
+    public function scopeIsDoctor($query){
+        $query = $query->whereHas('doctor', function (Builder $quer){
+            $quer->where('account_id',auth()->user()->id);
+       })->first();
+       if($query){
+           return true;
+       }
+       return false;
+    }
+
+    public function scopeIsPatient($query){
+        $query = $query->whereHas('patient', function (Builder $quer){
+            $quer->where('account_id',auth()->user()->id);
+       })->first();
+       if($query){
+           return true;
+       }
+       return false;
     }
 }

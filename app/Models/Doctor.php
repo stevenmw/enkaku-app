@@ -21,4 +21,8 @@ class Doctor extends Model
     public function account(){
         return $this->belongsTo(Account::class,'account_id','id');
     }
+
+    public function patients(){
+        return $this->belongsToMany(Patient::class,'patient_doctors','patient_id','doctor_id');
+    }
 }

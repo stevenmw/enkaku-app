@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
     <link rel="stylesheet" href="css/home.css">
 </head>
@@ -20,22 +20,16 @@
 
 <header class="header">
 
-    {{-- <a href="#" class="logo"> <i class="fas fa-clinic-medical"></i> Enkaku. </a> --}}
-    <a href="#home" class="logo"> <i class="fas fa-hand-holding-heart"></i> Enkaku </a>
-    {{-- <span class="material-icons-sharp">medical_information</span> --}}
-    {{-- <img src="./images/Logo 2 (1).svg" class="logo"> --}}
+    <a href="/" class="logo"> <i class="fas fa-hand-holding-heart"></i> Enkaku </a>
 
     <nav class="navbar">
-        <a href="#home">home</a>
-        {{-- <a href="/">home</a> --}}
+        <a href="/">home</a>
         <a href="#services">services</a>
         <a href="#about">about</a>
         <a href="#doctors">doctors</a>
-        {{-- <a href="#book">book</a> --}}
         <a href="#review">review</a>
-        {{-- <a href="#blogs">blogs</a> --}}
         <a href="#review" type="hidden"></a>
-        <div class="dropdown">
+        {{-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Profile
             </button>
@@ -44,7 +38,7 @@
                 <li><a href='#' class="dropdown-item" href="#">Settings</a></li>
                 <li><a href='#' class="dropdown-item" href="#">Logut</a></li>
             </ul>
-        </div>
+        </div> --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </nav>
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -58,20 +52,14 @@
 <section class="home" id="home">
 
     <div class="image">
-        {{-- <img src="images/home-img.svg" alt="home.image"> --}}
         <img src="images/nursing-home-animate.svg" alt="home.image">
-        {{-- <img src="images/home_enkaku.svg" alt="home.image"> --}}
-        {{-- <img src="images/about_enkaku.svg" alt="home.image"> --}}
-        {{-- <a href="https://storyset.com/people">People illustrations by Storyset</a> --}}
     </div>
 
     <div class="content">
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
-        {{-- <a href="/" class="btn"> sign in <span class="fas fa-chevron-right"></span> </a> --}}
         <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
         <a href="/register" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
-        {{-- <a href="/" class="btn"> sign up <span class="fas fa-chevron-right"></span> </a> --}}
     </div>
 
 </section>

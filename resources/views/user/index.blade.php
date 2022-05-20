@@ -26,13 +26,13 @@
         </div>
     @endif
       <div class="col-md-12">
-        <h4>Welcome Home Steven</h4>
+        <h4>Welcome Home, {{ auth()->user()->name }} </h4>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 mb-5">
         <a href="/">
-          <div class="card bg-primary text-white h-100">
+          <div class="card bg-dark text-white h-100">
             <div class="card-body py-5">FES</div>
             <div class="card-footer d-flex">
               View Details
@@ -45,7 +45,7 @@
       </div>
       <div class="col-md-3 mb-5">
         <a href="/">
-          <div class="card bg-primary text-white h-100">
+          <div class="card bg-dark text-white h-100">
             <div class="card-body py-5">Eksoskeleton</div>
             <div class="card-footer d-flex">
               View Details
@@ -84,11 +84,11 @@
     <div class="row">
       <div class="col-12 mb-3">
           
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#importModal">
               Import File
             </button>
-            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
-            <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+            <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
+            <button type="button" class="btn btn-dark me-2" onclick="exportData">Export File</button>
           
             {{-- Modal Import File --}}
         <div class="modal" id="importModal" tabindex="-1">
@@ -124,7 +124,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Import</button>
+                <button type="submit" class="btn btn-dark">Import</button>
               </form>
               </div>
             </div>
@@ -158,7 +158,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
+                <button type="button" class="btn btn-dark" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
               </form>
               </div>
             </div>

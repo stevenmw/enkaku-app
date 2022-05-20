@@ -18,12 +18,12 @@ use App\Http\Controllers\FileController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('landing_page.home');
 });
 
-Route::get('/main', function () {
-    return view('main');
-});
+// Route::get('/main', function () {
+//     return view('main');
+// });
 
 // Route::get('/user', function () {
 //     return view('user.index');
@@ -32,14 +32,21 @@ Route::get('/main', function () {
 // Route::get('/home', function () {
 //     return view('templates.layouts.home');
 // });
-Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/profile', [DashboardController::class, 'profile']);
+Route::get('/helpcenter', [DashboardController::class, 'helpcenter']);
+Route::get('/current', [DashboardController::class, 'current']);
+Route::get('/trajectory', [DashboardController::class, 'trajectory']);
+Route::get('/velocity', [DashboardController::class, 'velocity']);
+
 Route::post('/import-file',[FileController::class,'import']);
 Route::get('/process-file',[FileController::class,'processFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);

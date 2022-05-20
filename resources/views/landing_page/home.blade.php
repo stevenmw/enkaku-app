@@ -20,20 +20,14 @@
 
 <header class="header">
 
-    {{-- <a href="#" class="logo"> <i class="fas fa-clinic-medical"></i> Enkaku. </a> --}}
     <a href="/" class="logo"> <i class="fas fa-hand-holding-heart"></i> Enkaku </a>
-    {{-- <span class="material-icons-sharp">medical_information</span> --}}
-    {{-- <img src="./images/Logo 2 (1).svg" class="logo"> --}}
 
     <nav class="navbar">
-        <a href="#home">home</a>
-        {{-- <a href="/">home</a> --}}
+        <a href="/">home</a>
         <a href="#services">services</a>
         <a href="#about">about</a>
         <a href="#doctors">doctors</a>
-        {{-- <a href="#book">book</a> --}}
         <a href="#review">review</a>
-        {{-- <a href="#blogs">blogs</a> --}}
         <a href="#review" type="hidden"></a>
         {{-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,20 +52,14 @@
 <section class="home" id="home">
 
     <div class="image">
-        {{-- <img src="images/home-img.svg" alt="home.image"> --}}
         <img src="images/nursing-home-animate.svg" alt="home.image">
-        {{-- <img src="images/home_enkaku.svg" alt="home.image"> --}}
-        {{-- <img src="images/about_enkaku.svg" alt="home.image"> --}}
-        {{-- <a href="https://storyset.com/people">People illustrations by Storyset</a> --}}
     </div>
 
     <div class="content">
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
-        {{-- <a href="/" class="btn"> sign in <span class="fas fa-chevron-right"></span> </a> --}}
         <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
         <a href="/register" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
-        {{-- <a href="/" class="btn"> sign up <span class="fas fa-chevron-right"></span> </a> --}}
     </div>
 
 </section>

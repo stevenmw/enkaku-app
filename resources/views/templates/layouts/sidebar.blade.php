@@ -30,7 +30,7 @@
           <li>
             <a href="#" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-book-fill"></i></span>
-              <span>Pages</span>
+              <span>Schedule</span>
             </a>
           </li>
         @endif
@@ -42,12 +42,6 @@
           </div>
         </li>
         <li>
-          {{-- <a href="#" class="nav-link px-3">
-            <span class="me-2">
-              <i class="bi bi-graph-up"></i>
-            </span>
-            <span>Charts</span>
-          </a> --}}
           <a
             class="nav-link px-3 sidebar-link"
             data-bs-toggle="collapse"
@@ -64,7 +58,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/velocity" class="nav-link px-3">
                   <span class="me-2">
                     <i class="bi bi-speedometer2"></i>
                   </span>
@@ -76,7 +70,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/current" class="nav-link px-3">
                   <span class="me-2">
                     <i class="bi bi-activity"></i>
                   </span>
@@ -88,7 +82,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/trajectory" class="nav-link px-3">
                   <span class="me-2">
                     {{-- <i class="bi bi-speedometer2"></i> --}}
                     <i class="bi bi-graph-down"></i>
@@ -103,6 +97,19 @@
           <a href="#" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-table"></i></span>
             <span>Tables</span>
+          </a>
+        </li>
+        <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+        <li>
+          <a href="/helpcenter" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-question-circle"></i></span>
+            <span>Help Center</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-question-circle"></i></span>
+            <span>Privacy & Policy</span>
           </a>
         </li>
       </ul>

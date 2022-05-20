@@ -13,49 +13,28 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-        <li>
-          <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-            Managemenet
-          </div>
-        </li>
-        <li>
-          {{-- <a
-            class="nav-link px-3 sidebar-link"
-            data-bs-toggle="collapse"
-            href="#layouts"
-          >
-            <span class="me-2"><i class="bi bi-layout-split"></i></span>
-            <span>User Lists</span>
-            <span class="ms-auto">
-              <span class="right-icon">
-                <i class="bi bi-chevron-down"></i>
-              </span>
-            </span>
-          </a>
-          <div class="collapse" id="layouts">
-            <ul class="navbar-nav ps-3">
-              <li>
-                <a href="#" class="nav-link px-3">
-                  <span class="me-2"
-                    ><i class="bi bi-speedometer2"></i
-                  ></span>
-                  <span>Dashboard</span>
-                </a>
-              </li>
-            </ul>
-          </div> --}}
-          <a href="#" class="nav-link px-3">
-            <span class="me-2"><i class="bi bi-layout-split"></i></span>
-            <span>User Lists</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-3">
-            <span class="me-2"><i class="bi bi-book-fill"></i></span>
-            <span>Pages</span>
-          </a>
-        </li>
+
+        @if ( auth()->user()->user_role->id!=2 )         
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li>
+            <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+              Managemenet
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-layout-split"></i></span>
+              <span>User Lists</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-book-fill"></i></span>
+              <span>Pages</span>
+            </a>
+          </li>
+        @endif
+
         <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
         <li>
           <div class="text-muted small fw-bold text-uppercase px-3 mb-3">

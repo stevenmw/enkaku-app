@@ -36,6 +36,9 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/profile', [DashboardController::class, 'profile']);
 Route::get('/helpcenter', [DashboardController::class, 'helpcenter']);
+Route::get('/current', [DashboardController::class, 'current']);
+Route::get('/trajectory', [DashboardController::class, 'trajectory']);
+Route::get('/velocity', [DashboardController::class, 'velocity']);
 
 Route::post('/import-file',[FileController::class,'import']);
 Route::get('/process-file',[FileController::class,'processFile']);

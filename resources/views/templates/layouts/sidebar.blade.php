@@ -54,7 +54,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/velocity" class="nav-link px-3">
                   <span class="me-2">
                     <i class="bi bi-speedometer2"></i>
                   </span>
@@ -66,7 +66,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/current" class="nav-link px-3">
                   <span class="me-2">
                     <i class="bi bi-activity"></i>
                   </span>
@@ -78,7 +78,7 @@
           <div class="collapse" id="layouts">
             <ul class="navbar-nav ps-3">
               <li>
-                <a href="#" class="nav-link px-3">
+                <a href="/trajectory" class="nav-link px-3">
                   <span class="me-2">
                     {{-- <i class="bi bi-speedometer2"></i> --}}
                     <i class="bi bi-graph-down"></i>

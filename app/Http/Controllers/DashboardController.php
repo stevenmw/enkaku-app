@@ -20,4 +20,19 @@ class DashboardController extends Controller
     {
         return view('user.helpcenter');
     }
+
+    public function current()
+    {
+        return view('user.current');
+    }
+
+    public function trajectory()
+    {
+        return view('user.trajectory');
+    }
+
+    public function velocity()
+    {
+        return view('user.velocity');
+    }
 }

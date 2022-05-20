@@ -120,7 +120,7 @@
                               Please choose a name.
                             </div>
                             <br>
-                            <input type="file" name="file" id="file" accept=".txt">
+                            <input type="file" name="file" id="file">
 
                         </div>
                         <div class="modal-footer">
@@ -196,43 +196,70 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 mb-3">
+
+        <div class="col-12 mb-3">
           <div class="card h-100">
             <div class="card-header">
               <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-              Current Chart
+              Velocity Chart
             </div>
             <div class="card-body">
-              {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-              <canvas id="chart" width="400" height="200"></canvas>
+              <canvas id="velocity-chart" width="400" height="200"></canvas>
             </div>
           </div>
         </div>
-      </div>
-        <div class="card h-100">
-          <div class="card-header">
-            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Velocity Chart
-          </div>
-          <div class="card-body">
-            {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-            <canvas id="chart" width="400" height="200"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="card h-100">
-          <div class="card-header">
-            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Current Chart
-          </div>
-          <div class="card-body">
-            {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-            <canvas id="chart" width="400" height="200"></canvas>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Flex No Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-flex-no-move-chart" width="400" height="200"></canvas>
+            </div>
           </div>
         </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Exten No Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-exten-no-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Flex Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-flex-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Extem Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-exten-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+    
     <div class="row">
       <div class="col-md-12 mb-3">
         <div class="card">

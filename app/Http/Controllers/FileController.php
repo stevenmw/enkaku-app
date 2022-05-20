@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ArusImport;
+use App\Imports\VelocityImport;
 use App\Models\TrainingPath;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
@@ -26,7 +29,24 @@ class FileController extends Controller
                 // nama file saat disimpan di server
                 $fileName = $request->type.'-'.auth()->user()->id.'-'. Carbon::now()->format('ymd').'.'. $file->getClientOriginalExtension();
                 // namatraining-id-tanggal
-                $filePath = './newFile';
+                
+                switch ($request->type) {
+                    case TrainingPath::trayektori:
+                        $filePath = './File/Trayektori';
+                        break;
+                    
+                    case TrainingPath::arus:
+                        $filePath = './File/Arus';
+                        break;
+
+                    case TrainingPath::kecepatan:
+                        $filePath = './File/Kecepatan';
+                        break;
+
+                    default:
+                        $filePath = './File';
+                        break;
+                }
                 $trainPath=TrainingPath::create([
                     'patient_id' => 1,
                     'path_name' => $filePath.'/'.$fileName,
@@ -54,34 +74,91 @@ class FileController extends Controller
                     $data["$value"] = $this->processTrayektoriFile($temp->path_name);
                 }
                 if($value == TrainingPath::arus){
-                    $data["$value"] = $this->processArusFile($temp);
+                    $data["$value"] = $this->processArusFile($temp->path_name);
                 }
                 if($value == TrainingPath::kecepatan){
-                    $data["$value"] = $this->processKecepatanFile($temp);
+                    $data["$value"] = $this->processKecepatanFile($temp->path_name);
                 }
             }   
             
         }
-        $response = [
-            'trayektori'=> $data,
-        ];
         return response()->json($data);
     }
 
     public function processArusFile($pathFile){
-        return null;
+        $path = Storage::path($pathFile);
+        $data = Excel::toArray(new ArusImport,$path);
+        $data = $data[0];
+        $timeFlekNoVol = [];
+        $arusFlekNoVol = [];
+        $timeEksNoVol = [];
+        $arusEksNoVol = [];
+        $timeFlekVol = [];
+        $arusFlekVol = [];
+        $timeEksVol = [];
+        $arusEksVol = [];
+
+        for ($i=2; $i < count($data); $i++) { 
+            array_push($timeFlekNoVol,$data[$i][0]);
+            array_push($arusFlekNoVol, $data[$i][1]);
+            array_push($timeEksNoVol,$data[$i][3]);
+            array_push($arusEksNoVol,$data[$i][4]);
+            array_push($timeFlekVol,$data[$i][6]);
+            array_push($arusFlekVol,$data[$i][7]);
+            array_push($timeEksVol,$data[$i][9]);
+            array_push($arusEksVol,$data[$i][10]);
+        }
+        
+        $response = [
+            'timeFlekNoVol' => $timeFlekNoVol,
+            'arusFlekNoVol' => $arusFlekNoVol,
+            'timeEksNoVol' => $timeEksNoVol,
+            'arusEksNoVol' => $arusEksNoVol,
+            'timeFlekVol' => $timeFlekVol,
+            'arusFlekVol' => $arusFlekVol,
+            'timeEksVol' => $timeEksVol,
+            'arusEksVol' => $arusEksVol,
+        ];
+
+        return $response;
     }
 
     public function processKecepatanFile($pathFile){
-        return null;
+        $path = Storage::path($pathFile);
+        $excel = Excel::toArray(new VelocityImport,$path);
+        $data = $excel[0];
+        $velocity = [];
+        $velocityConv = [];
+        $setPoint = [];
+        $xData = [];
+        $x = 0;
+
+        $i=1;
+        while ($data[$i][41]) {
+            array_push($velocity,$data[$i][39]);
+            array_push($velocityConv, $data[$i][40]);
+            array_push($setPoint,$data[$i][41]);
+            array_push($xData,$x);
+            $x++;
+            $i++;
+        }
+
+        $result = [
+            'velocity' => $velocity,
+            'velocityConv' => $velocityConv,
+            'setPoint' => $setPoint,
+            'xData' => $xData,
+        ];
+
+        return $result;
     }
 
     public function processTrayektoriFile($pathFile){
         $path = Storage::path($pathFile);
         $lines = File::lines($path);
-//         time(s)	shldr	elbow	error	realtime(s)
-// -3	57,6	180,3	-62,660	0,000
-// -2,98	58,2	176,3	-58,180	0,000
+        //         time(s)	shldr	elbow	error	realtime(s)
+        // -3	57,6	180,3	-62,660	0,000
+        // -2,98	58,2	176,3	-58,180	0,000
         $time = [];
         $shoulder = [];
         $elbow = [];

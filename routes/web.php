@@ -18,12 +18,12 @@ use App\Http\Controllers\FileController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('landing_page.home');
 });
 
-Route::get('/main', function () {
-    return view('main');
-});
+// Route::get('/main', function () {
+//     return view('main');
+// });
 
 // Route::get('/user', function () {
 //     return view('user.index');
@@ -35,6 +35,7 @@ Route::get('/main', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/profile', [DashboardController::class, 'profile']);
+Route::get('/helpcenter', [DashboardController::class, 'helpcenter']);
 
 Route::post('/import-file',[FileController::class,'import']);
 Route::get('/process-file',[FileController::class,'processFile']);

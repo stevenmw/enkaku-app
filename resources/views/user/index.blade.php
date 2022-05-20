@@ -150,12 +150,12 @@
                   
                   <form method="POST" enctype="multipart/form-data" class="needs-validation" id="form-show">
                     @csrf
-                    {{-- <select class="form-select" aria-label="pasien Select" name="type" required>
+                    <select class="form-select" aria-label="pasien Select" name="type" required>
                       <option value="" selected>---Jenis Training---</option>
                       <option value="ARUS">Arus</option>
                       <option value="KECEPATAN">Kecepatan</option>
                       <option value="TRAYEKTORI">Trayektori</option>
-                    </select> --}}
+                    </select>
                     @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
                     <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                       <option value="" selected>---Pasien---</option>

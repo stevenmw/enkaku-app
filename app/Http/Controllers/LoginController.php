@@ -9,6 +9,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if(auth()->user()){
+            return redirect('/dashboard');
+        }
         return view('authorization.login');
     }
 
@@ -29,10 +32,13 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $this->guard()->logout();
-        $request->session()->invalidate();
-
-        return $this->loggedOut($request) ?: redirect('/login');
+        Auth::logout();
+ 
+    $request->session()->invalidate();
+ 
+    $request->session()->regenerateToken();
+ 
+    return redirect('/login');;
     }
 
 }

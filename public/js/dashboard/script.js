@@ -208,7 +208,7 @@ function processVelocity(data={}){
     yAxis = [
         {
             label: 'velocity',
-            data: data.velocity,
+            data: data.velocityConv,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red'

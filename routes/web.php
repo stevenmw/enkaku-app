@@ -32,14 +32,14 @@ Route::get('/main', function () {
 // Route::get('/home', function () {
 //     return view('templates.layouts.home');
 // });
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::post('/import-file',[FileController::class,'import']);
-Route::get('/process-file',[FileController::class,'processFile']);
+Route::post('/process-file',[FileController::class,'processFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout']);

@@ -2,34 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ArusImport;
+use App\Imports\VelocityImport;
 use App\Models\TrainingPath;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
     public function import(Request $request){
         $request->validate([
-            // 'patient_id' => 'required|integer',
+            'patient_id' => 'required|integer',
             'file' => 'required',
+            'type' => ['required',Rule::in([TrainingPath::arus,TrainingPath::kecepatan,TrainingPath::trayektori])],
         ]);
         try {
-            
             if($request->file('file')){
                 $file = $request->file('file');
                 DB::beginTransaction();
                 $onlyName = explode(".",$file->getClientOriginalName())[0];
-                $fileName = $onlyName.'-'. Carbon::now()->format('ymd').'.'. $file->getClientOriginalExtension();
+                // nama file saat disimpan di server
+                $fileName = $request->type.'-'.auth()->user()->id.'-'. Carbon::now()->format('ymd').'.'. $file->getClientOriginalExtension();
                 // namatraining-id-tanggal
-                $filePath = './newFile';
-                // dd($fileName);
+                
+                switch ($request->type) {
+                    case TrainingPath::trayektori:
+                        $filePath = './File/Trayektori';
+                        break;
+                    
+                    case TrainingPath::arus:
+                        $filePath = './File/Arus';
+                        break;
+
+                    case TrainingPath::kecepatan:
+                        $filePath = './File/Kecepatan';
+                        break;
+
+                    default:
+                        $filePath = './File';
+                        break;
+                }
                 $trainPath=TrainingPath::create([
                     'patient_id' => 1,
                     'path_name' => $filePath.'/'.$fileName,
-                    'path_size' => $file->getSize()
+                    'path_size' => $file->getSize(),
+                    'type' => $request->type,
                 ]);
                 $file->storeAs($filePath, $fileName);
                 DB::commit();
@@ -44,12 +66,99 @@ class FileController extends Controller
     }
 
     public function processFile(Request $request){
-        $path = Storage::path('newFile/fileTxt.txt');
-        $lines = File::lines($path);
-//         time(s)	shldr	elbow	error	realtime(s)
-// -3	57,6	180,3	-62,660	0,000
-// -2,98	58,2	176,3	-58,180	0,000
+        $data=[];
+        foreach (TrainingPath::arrayType as $value) {
+            $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$value)->first(); 
+            if($temp){
+                if($value == TrainingPath::trayektori){
+                    $data["$value"] = $this->processTrayektoriFile($temp->path_name);
+                }
+                if($value == TrainingPath::arus){
+                    $data["$value"] = $this->processArusFile($temp->path_name);
+                }
+                if($value == TrainingPath::kecepatan){
+                    $data["$value"] = $this->processKecepatanFile($temp->path_name);
+                }
+            }   
+            
+        }
+        return response()->json($data);
+    }
 
+    public function processArusFile($pathFile){
+        $path = Storage::path($pathFile);
+        $data = Excel::toArray(new ArusImport,$path);
+        $data = $data[0];
+        $timeFlekNoVol = [];
+        $arusFlekNoVol = [];
+        $timeEksNoVol = [];
+        $arusEksNoVol = [];
+        $timeFlekVol = [];
+        $arusFlekVol = [];
+        $timeEksVol = [];
+        $arusEksVol = [];
+
+        for ($i=2; $i < count($data); $i++) { 
+            array_push($timeFlekNoVol,$data[$i][0]);
+            array_push($arusFlekNoVol, $data[$i][1]);
+            array_push($timeEksNoVol,$data[$i][3]);
+            array_push($arusEksNoVol,$data[$i][4]);
+            array_push($timeFlekVol,$data[$i][6]);
+            array_push($arusFlekVol,$data[$i][7]);
+            array_push($timeEksVol,$data[$i][9]);
+            array_push($arusEksVol,$data[$i][10]);
+        }
+        
+        $response = [
+            'timeFlekNoVol' => $timeFlekNoVol,
+            'arusFlekNoVol' => $arusFlekNoVol,
+            'timeEksNoVol' => $timeEksNoVol,
+            'arusEksNoVol' => $arusEksNoVol,
+            'timeFlekVol' => $timeFlekVol,
+            'arusFlekVol' => $arusFlekVol,
+            'timeEksVol' => $timeEksVol,
+            'arusEksVol' => $arusEksVol,
+        ];
+
+        return $response;
+    }
+
+    public function processKecepatanFile($pathFile){
+        $path = Storage::path($pathFile);
+        $excel = Excel::toArray(new VelocityImport,$path);
+        $data = $excel[0];
+        $velocity = [];
+        $velocityConv = [];
+        $setPoint = [];
+        $xData = [];
+        $x = 0;
+
+        $i=1;
+        while ($data[$i][41]) {
+            array_push($velocity,$data[$i][39]);
+            array_push($velocityConv, $data[$i][40]);
+            array_push($setPoint,$data[$i][41]);
+            array_push($xData,$x);
+            $x++;
+            $i++;
+        }
+
+        $result = [
+            'velocity' => $velocity,
+            'velocityConv' => $velocityConv,
+            'setPoint' => $setPoint,
+            'xData' => $xData,
+        ];
+
+        return $result;
+    }
+
+    public function processTrayektoriFile($pathFile){
+        $path = Storage::path($pathFile);
+        $lines = File::lines($path);
+        //         time(s)	shldr	elbow	error	realtime(s)
+        // -3	57,6	180,3	-62,660	0,000
+        // -2,98	58,2	176,3	-58,180	0,000
         $time = [];
         $shoulder = [];
         $elbow = [];
@@ -67,15 +176,13 @@ class FileController extends Controller
             array_push($error,$this->replaceComa(@$arr[3]));
             array_push($realTime,$this->replaceComa(@$arr[4]));
         }
-        
-        $response = [
+        return [
             'time' => $time,
             'shoulder' => $shoulder,
             'elbow' => $elbow,
             'error' => $error,
             'realTime' => $realTime,
         ];
-        return response()->json($response);
     }
 
     public function replaceComa($strVar){

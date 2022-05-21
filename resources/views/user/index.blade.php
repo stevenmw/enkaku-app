@@ -14,17 +14,17 @@
       <div class="alert alert-danger">
           {{ session('error') }}
       </div>
-    @endif  
+    @endif 
     {{-- form validation --}}
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif 
       <div class="col-md-12">
         <h4>Welcome Home Steven</h4>
       </div>
@@ -82,114 +82,184 @@
       </div> --}}
     </div>
     <div class="row">
-      <div class="col-12 mb-3">
-          
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-              Import File
-            </button>
-            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
-            <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
-          
-            {{-- Modal Import File --}}
-        <div class="modal" id="importModal" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Import File</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                
-                <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
-                  @csrf
-                  <select class="form-select" aria-label="pasien Select" name="type" required>
-                    <option value="" selected>---Jenis Training---</option>
-                    <option value="1">Arus</option>
-                    <option value="2">Kecepatan</option>
-                    <option value="3">Trayektori</option>
-                  </select>
-                  <br>
-                  <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
-                    <option value="" selected>---Pasien---</option>
-                    <option value="1">Adi</option>
-                    <option value="2">Budi</option>
-                    <option value="3">Arif</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please choose a username.
-                  </div>
-                  <br>
-                  <input type="file" name="file" id="file" accept=".txt">
+      <div class="row">
+        <div class="col-12 mb-3">
+          {{-- Pasien Tidak Bisa Import File --}}
+          @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                Import File
+              </button>
+              {{-- Modal Import File --}}
+                  <div class="modal" id="importModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Import File</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          
+                          <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
+                            @csrf
+                            <select class="form-select" aria-label="pasien Select" name="type" required>
+                              <option value="" selected>---Jenis Training---</option>
+                              <option value="ARUS">Arus</option>
+                              <option value="KECEPATAN">Kecepatan</option>
+                              <option value="TRAYEKTORI">Trayektori</option>
+                            </select>
+                            <br>
+                          
+                            <select class="form-select" aria-label="pasien Select" name="patient_id" required>
+                              <option value="" selected>---Pasien---</option>
+                              @foreach ($patients as $patient)
+                              <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
+                              @endforeach
+                            </select>        
+                          
+                            <div class="invalid-feedback">
+                              Please choose a name.
+                            </div>
+                            <br>
+                            <input type="file" name="file" id="file">
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Import</button>
-              </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{-- Modal Import File End --}}                
+          @endif
+
+              <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalShowData">Show Data</button>
+              <button type="button" class="btn btn-primary me-2" onclick="exportData">Export File</button>
+
+        
+          {{-- Modal Show Data --}}
+          <div class="modal" id="modalShowData" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Show File</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                  <form method="POST" enctype="multipart/form-data" class="needs-validation" id="form-show">
+                    @csrf
+                    <select class="form-select" aria-label="pasien Select" name="type" required>
+                      <option value="" selected>---Jenis Training---</option>
+                      <option value="ARUS">Arus</option>
+                      <option value="KECEPATAN">Kecepatan</option>
+                      <option value="TRAYEKTORI">Trayektori</option>
+                    </select>
+                    @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
+                    <select class="form-select" aria-label="pasien Select" name="patient_id" required>
+                      <option value="" selected>---Pasien---</option>
+                      @foreach ($patients as $patient)
+                      <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
+                      @endforeach
+                    </select>
+                    <div class="invalid-feedback">
+                      Please choose a name.
+                    </div>
+                    @endif
+                    @if(auth()->user()->isPatient())
+                    <input type="hidden" name="patient_id" value="{{auth()->user()->patient->id}}">
+                    @endif
+                    <br>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
+                </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {{-- Modal Import File End --}}
+          {{-- Modal Show Data End --}}
 
-        {{-- Modal Show Data --}}
-        <div class="modal" id="modalShowData" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Show File</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                
-                <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
-                  @csrf
-                  <select class="form-select" aria-label="pasien Select" name="pasien_id" required>
-                    <option value="" selected>---Pasien---</option>
-                    <option value="1">Adi</option>
-                    <option value="2">Budi</option>
-                    <option value="3">Arif</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please choose a username.
-                  </div>
-                  <br>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="showData()" data-bs-dismiss="modal">Show Data</button>
-              </form>
-              </div>
+          
+          
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Trayektori Chart
+            </div>
+            <div class="card-body">
+              {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
+              <canvas id="trayektori-chart" width="400" height="200"></canvas>
             </div>
           </div>
         </div>
-        {{-- Modal Show Data End --}}
 
-        <div class="card h-100">
-          <div class="card-header">
-            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Velocity Chart
-          </div>
-          <div class="card-body">
-            {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-            <canvas id="chart" width="400" height="200"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="card h-100">
-          <div class="card-header">
-            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Current Chart
-          </div>
-          <div class="card-body">
-            {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-            <canvas id="chart" width="400" height="200"></canvas>
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Velocity Chart
+            </div>
+            <div class="card-body">
+              <canvas id="velocity-chart" width="400" height="200"></canvas>
+            </div>
           </div>
         </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Flex No Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-flex-no-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Exten No Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-exten-no-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Flex Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-flex-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Current Chart (Extem Move)
+            </div>
+            <div class="card-body">
+              <canvas id="current-exten-move-chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+    
     <div class="row">
       <div class="col-md-12 mb-3">
         <div class="card">

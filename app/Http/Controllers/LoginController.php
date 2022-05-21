@@ -9,6 +9,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (auth()->user()) {
+            return redirect('/dashboard');
+        }
         return view('authorization.login');
     }
 
@@ -19,7 +22,7 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
@@ -30,12 +33,11 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
- 
-        $request->session()->invalidate();
-     
-        $request->session()->regenerateToken();
-     
-        return redirect('/');
-    }
 
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');;
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainingPathsTable extends Migration
+class CreateDoctorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateTrainingPathsTable extends Migration
      */
     public function up()
     {
-        Schema::create('training_paths', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('patient_id');
-            $table->string('path_name');
-            $table->integer('path_size');
-            $table->enum('type',['ARUS','KECEPATAN','TRAYEKTORI']);
+
+            $table->foreignId('account_id')->constrained('accounts');
+            $table->date('date_birth');
+            $table->string('specialist');
+            $table->time('start_hour');
+            $table->time('end_hour');
+
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ class CreateTrainingPathsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('training_paths');
+        Schema::dropIfExists('doctors');
     }
 }

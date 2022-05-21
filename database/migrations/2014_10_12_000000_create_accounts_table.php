@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainingPathsTable extends Migration
+class CreateAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTrainingPathsTable extends Migration
      */
     public function up()
     {
-        Schema::create('training_paths', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('patient_id');
-            $table->string('path_name');
-            $table->integer('path_size');
-            $table->enum('type',['ARUS','KECEPATAN','TRAYEKTORI']);
+            $table->string('name');
+            $table->string('address');
+            $table->string('gender');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('confirm_password');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateTrainingPathsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('training_paths');
+        Schema::dropIfExists('accounts');
     }
 }

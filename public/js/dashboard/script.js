@@ -46,64 +46,181 @@
 //   });
 // });
 
-const chart = document.querySelector("#chart").getContext('2d');
+const trayektoriChart = document.querySelector("#trayektori-chart").getContext('2d');
+const currentFlexNoMoveChart = document.querySelector("#current-flex-no-move-chart").getContext('2d');
+const currentExtenNoMoveChart = document.querySelector("#current-exten-no-move-chart").getContext('2d');
+const currentFlexMoveChart = document.querySelector("#current-flex-move-chart").getContext('2d');
+const currentExtenMoveChart = document.querySelector("#current-exten-move-chart").getContext('2d');
+const velocityChart = document.querySelector("#velocity-chart").getContext('2d');
+
 
 // create a new instance
-const graph = new Chart(chart, {
+const trayektoriGraph = new Chart(trayektoriChart, {
     type: 'line',
-    data: {
-        labels: ['23:30:18.184', '23:30:18.323', '23:30:18.416', '23:30:18.555', '23:30:18.650', '23:30:18.744', '23:30:18.883', '23:30:18.976', '23:30:19.115', '23:30:19.209', '23:30:19.302', '23:30:19.442'],
-
-        datasets: [
-            {
-                label: 'Arus',
-                data: [0.004, 0.008, 0.004, 0.012, 0.012, 0.012, 0.012, 0.012, 0.012, 0.016, 0.008, 0.036],
-                borderColor: 'red',
-                borderWidth: 2
-            },
-            {
-                label: 'Kecepatan',
-                data: [31500, 299076, 401506, 567843, 33572, 48874, 39973, 39973, 76543, 31164, 46578],
-                borderColor: 'green',
-                borderWidth: 2
-            }
-        ]
-    },
     option: {
         responsive: true
     }
 })
 
-function drawChart(X=[],Y=[]){
+const velocityGraph = new Chart(velocityChart, {
+    type: 'line',
+    option: {
+        responsive: true
+    }
+})
+
+const currentFlexNoMoveGraph = new Chart(currentFlexNoMoveChart, {
+    type: 'line',
+    option: {
+        responsive: true
+    }
+})
+
+const currentExtenNoMoveGraph = new Chart(currentExtenNoMoveChart, {
+    type: 'line',
+    option: {
+        responsive: true
+    }
+})
+
+const currentFlexMoveGraph = new Chart(currentFlexMoveChart, {
+    type: 'line',
+    option: {
+        responsive: true
+    }
+})
+
+const currentExtenMoveGraph = new Chart(currentExtenMoveChart, {
+    type: 'line',
+    option: {
+        responsive: true
+    }
+})
+
+// Update Chart 
+function drawChart(graph={},X=[],Y=[]){
    
     graph.data.labels = X;
     graph.data.datasets = Y;
     graph.update();
 }
 
+// Send Request To Server to get File Data
 function showData(){
-    axios.get('/process-file')
+    const form = new FormData(document.getElementById('form-show'));
+
+    axios.post('/process-file',form)
     .then(function(response){
-        yAxis = [
-            {
-                label: 'Elbow',
-                data: response.data.elbow,
-                borderColor: 'red',
-                borderWidth: 0.5,
-                backgroundColor:'red'
-            },
-            {
-                label: 'Shoulder',
-                data: response.data.shoulder,
-                borderColor: 'green',
-                borderWidth: 0.5,
-                backgroundColor:'green'
-            }
-        ];
-        xAxis = response.data.realTime;
-        drawChart(xAxis,yAxis);
         // console.log(response.data);
-    }).catch(function(err){
-        console.log(err);
+        if(response.data.TRAYEKTORI){
+            processTrayektori(response.data.TRAYEKTORI);
+        }
+        if(response.data.ARUS){
+            processArus(response.data.ARUS);
+        }
+        if(response.data.KECEPATAN){
+            processVelocity(response.data.KECEPATAN);
+        }
+    }).catch(function(error){
+        console.log(error);
     });
+}
+
+// Process Data Trayektori and draw graph
+function processTrayektori(data={}){
+    yAxis = [
+        {
+            label: 'Elbow',
+            data: data.elbow,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+        {
+            label: 'Shoulder',
+            data: data.shoulder,
+            borderColor: 'green',
+            borderWidth: 0.5,
+            backgroundColor:'green'
+        }
+    ];
+    xAxis = data.realTime;
+    drawChart(trayektoriGraph,xAxis,yAxis);
+}
+
+// Process Data Arus and draw graph
+function processArus(data={}){
+    // Flexion No Voluntary Move
+    yAxis = [
+        {
+            label: 'Arus',
+            data: data.arusFlekNoVol,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+    ];
+    xAxis = data.timeFlekNoVol;
+    drawChart(currentFlexNoMoveGraph,xAxis,yAxis);
+
+     // Extension No Voluntary Move
+     yAxis = [
+        {
+            label: 'Arus',
+            data: data.arusEksNoVol,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+    ];
+    xAxis = data.timeEksNoVol;
+    drawChart(currentExtenNoMoveGraph,xAxis,yAxis);
+
+     // Flexion Voluntary Move
+     yAxis = [
+        {
+            label: 'Arus',
+            data: data.arusFlekVol,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+    ];
+    xAxis = data.timeFlekVol;
+    drawChart(currentFlexMoveGraph,xAxis,yAxis);
+
+     // Flexion No Voluntary Move
+     yAxis = [
+        {
+            label: 'Arus',
+            data: data.arusEksVol,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+    ];
+    xAxis = data.timeEksVol;
+    drawChart(currentExtenMoveGraph,xAxis,yAxis);
+}
+
+// Process Data Velocity and draw graph
+function processVelocity(data={}){
+    yAxis = [
+        {
+            label: 'velocity',
+            data: data.velocityConv,
+            borderColor: 'red',
+            borderWidth: 0.5,
+            backgroundColor:'red'
+        },
+        {
+            label: 'set point',
+            data: data.setPoint,
+            borderColor: 'green',
+            borderWidth: 0.5,
+            backgroundColor:'green'
+        }
+    ];
+    xAxis = data.xData;
+    drawChart(velocityGraph,xAxis,yAxis);
 }

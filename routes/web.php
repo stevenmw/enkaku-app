@@ -40,8 +40,8 @@ Route::get('/current', [DashboardController::class, 'current']);
 Route::get('/trajectory', [DashboardController::class, 'trajectory']);
 Route::get('/velocity', [DashboardController::class, 'velocity']);
 
-Route::post('/import-file',[FileController::class,'import']);
-Route::get('/process-file',[FileController::class,'processFile']);
+Route::post('/import-file', [FileController::class, 'import']);
+Route::post('/process-file', [FileController::class, 'processFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
@@ -49,4 +49,4 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout']);

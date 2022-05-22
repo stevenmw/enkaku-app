@@ -14,7 +14,7 @@
           </a>
         </li>
 
-        @if ( auth()->user()->user_role->id!=2 )         
+        @if ( !auth()->user()->isPatient() )     
           <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
           <li>
             <div class="text-muted small fw-bold text-uppercase px-3 mb-3">

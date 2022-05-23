@@ -18,7 +18,12 @@ class Account extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password','confirm_password'
+        'email',
+        'password',
+        'confirm_password',
+        'address',
+        'gender',
+        'name'
     ];
 
     /**

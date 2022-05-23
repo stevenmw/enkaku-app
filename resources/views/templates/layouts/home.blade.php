@@ -30,6 +30,8 @@
     <script src="./js/dashboard/jquery-3.5.1.js"></script>
     <script src="./js/dashboard/jquery.dataTables.min.js"></script>
     <script src="./js/dashboard/dataTables.bootstrap5.min.js"></script>
-    <script src="./js/dashboard/script.js"></script>
+
+    @yield('script_chart')
+    
   </body>
 </html>

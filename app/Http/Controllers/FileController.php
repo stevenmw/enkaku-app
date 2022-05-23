@@ -49,6 +49,7 @@ class FileController extends Controller
                 }
                 $trainPath=TrainingPath::create([
                     'patient_id' => 1,
+                    'file_name' => $fileName,
                     'path_name' => $filePath.'/'.$fileName,
                     'path_size' => $file->getSize(),
                     'type' => $request->type,
@@ -66,23 +67,55 @@ class FileController extends Controller
     }
 
     public function processFile(Request $request){
-        $data=[];
-        foreach (TrainingPath::arrayType as $value) {
-            $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$value)->first(); 
-            if($temp){
-                if($value == TrainingPath::trayektori){
-                    $data["$value"] = $this->processTrayektoriFile($temp->path_name);
-                }
-                if($value == TrainingPath::arus){
-                    $data["$value"] = $this->processArusFile($temp->path_name);
-                }
-                if($value == TrainingPath::kecepatan){
-                    $data["$value"] = $this->processKecepatanFile($temp->path_name);
-                }
-            }   
+        $data=null;
+        // foreach (TrainingPath::arrayType as $value) {
+        //     $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$value)->first(); 
+        //     if($temp){
+        //         if($value == TrainingPath::trayektori){
+        //             $data= $this->processTrayektoriFile($temp->path_name);
+        //         }
+        //         if($value == TrainingPath::arus){
+        //             $data = $this->processArusFile($temp->path_name);
+        //         }
+        //         if($value == TrainingPath::kecepatan){
+        //             $data = $this->processKecepatanFile($temp->path_name);
+        //         }
+        //     }   
             
+        // }
+
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
+
+        if($request->type == TrainingPath::kecepatan ){
+            $data = $this->processKecepatanFile($temp->path_name);
         }
+        if($request->type == TrainingPath::arus ){
+            $data = $this->processArusFile($temp->path_name);
+        }
+        if($request->type == TrainingPath::trayektori ){
+            $data = $this->processTrayektoriFile($temp->path_name);
+        }
+
         return response()->json($data);
+    }
+
+    public function downloadFile(Request $request){
+        $path=null;
+
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
+        
+        if($request->type == TrainingPath::kecepatan ){
+            $path = $this->processKecepatanFile($temp->path_name);
+        }
+        if($request->type == TrainingPath::arus ){
+            $path = $this->processArusFile($temp->path_name);
+        }
+        if($request->type == TrainingPath::trayektori ){
+            $path = $this->processTrayektoriFile($temp->path_name);
+        }
+
+        $file = Storage::download($temp->path_name, $temp->file_name);
+        return $file;
     }
 
     public function processArusFile($pathFile){

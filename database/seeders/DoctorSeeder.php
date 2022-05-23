@@ -21,7 +21,6 @@ class DoctorSeeder extends Seeder
         if(!$doctor){
             Doctor::create([
                 'account_id' => $account->id,
-                'date_birth' => '1999-08-20',
                 'specialist' => 'jantung',
                 'start_hour' => Carbon::now()->toTimeString(),
                 'end_hour' => Carbon::now()->addHour(3)->toTimeString(),

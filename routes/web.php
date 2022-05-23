@@ -33,15 +33,16 @@ Route::get('/', function () {
 //     return view('templates.layouts.home');
 // });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/profile', [DashboardController::class, 'profile']);
-Route::get('/helpcenter', [DashboardController::class, 'helpcenter']);
-Route::get('/current', [DashboardController::class, 'current']);
-Route::get('/trajectory', [DashboardController::class, 'trajectory']);
-Route::get('/velocity', [DashboardController::class, 'velocity']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/profile', [DashboardController::class, 'profile'])->middleware('auth');
+Route::get('/helpcenter', [DashboardController::class, 'helpcenter'])->middleware('auth');
+Route::get('/current', [DashboardController::class, 'current'])->middleware('auth');
+Route::get('/trajectory', [DashboardController::class, 'trajectory'])->middleware('auth');
+Route::get('/velocity', [DashboardController::class, 'velocity'])->middleware('auth');
 
 Route::post('/import-file', [FileController::class, 'import']);
 Route::post('/process-file', [FileController::class, 'processFile']);
+Route::post('/download', [FileController::class,'downloadFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);

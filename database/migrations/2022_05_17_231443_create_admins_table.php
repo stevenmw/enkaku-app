@@ -17,8 +17,8 @@ class CreateAdminsTable extends Migration
             $table->id();
 
             $table->foreignId('account_id')->constrained('accounts');
-            $table->time('start_hour');
-            $table->time('end_hour');
+            $table->time('start_hour')->nullable();
+            $table->time('end_hour')->nullable();
 
             $table->timestamps();
         });

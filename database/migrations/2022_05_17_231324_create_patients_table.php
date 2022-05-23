@@ -17,11 +17,10 @@ class CreatePatientsTable extends Migration
             $table->id();
 
             $table->foreignId('account_id')->constrained('accounts');
-            $table->date('date_birth');
-            $table->integer('weight');
-            $table->integer('height');
-            $table->string('disease_and_condition');
-            $table->string('contact_number');
+            $table->integer('weight')->nullable();
+            $table->integer('height')->nullable();
+            $table->string('disease_and_condition')->nullable();
+            $table->string('contact_number')->nullable();
 
             $table->timestamps();
         });

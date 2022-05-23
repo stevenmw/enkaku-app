@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
+            $table->date('date_birth');
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');

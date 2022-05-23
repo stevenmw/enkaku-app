@@ -20,7 +20,6 @@ class PatientSeeder extends Seeder
         if(!$patient){
             Patient::create([
                 'account_id' => $account->id,
-                'date_birth' => '2000-08-02',
                 'weight' => 80,
                 'height' => 170,
                 'disease_and_condition' => 'Sehat Aja',

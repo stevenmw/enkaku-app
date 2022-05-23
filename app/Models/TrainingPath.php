@@ -18,6 +18,7 @@ class TrainingPath extends Model
 
     protected $fillable = [
         'patient_id',
+        'file_name',
         'path_name',
         'path_size',
         'type',

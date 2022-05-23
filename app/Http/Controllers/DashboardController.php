@@ -34,16 +34,46 @@ class DashboardController extends Controller
 
     public function current()
     {
-        return view('user.current');
+        $patients=[];
+        if(auth()->user()->isDoctor()){
+            $patients = Patient::whereHas('doctors',function(Builder $query){
+                $query->where('doctor_id',auth()->user()->doctor->id);
+            })->get();
+        }
+        if(auth()->user()->isAdmin()){
+            $patients = Patient::all();
+        }
+
+        return view('user.current',["patients" => $patients]);
     }
 
     public function trajectory()
     {
-        return view('user.trajectory');
+        $patients=[];
+        if(auth()->user()->isDoctor()){
+            $patients = Patient::whereHas('doctors',function(Builder $query){
+                $query->where('doctor_id',auth()->user()->doctor->id);
+            })->get();
+        }
+        if(auth()->user()->isAdmin()){
+            $patients = Patient::all();
+        }
+
+        return view('user.trajectory',["patients" => $patients]);
     }
 
     public function velocity()
     {
-        return view('user.velocity');
+        $patients=[];
+        if(auth()->user()->isDoctor()){
+            $patients = Patient::whereHas('doctors',function(Builder $query){
+                $query->where('doctor_id',auth()->user()->doctor->id);
+            })->get();
+        }
+        if(auth()->user()->isAdmin()){
+            $patients = Patient::all();
+        }
+
+        return view('user.velocity',["patients" => $patients]);
     }
 }

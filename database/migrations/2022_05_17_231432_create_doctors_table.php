@@ -17,10 +17,9 @@ class CreateDoctorsTable extends Migration
             $table->id();
 
             $table->foreignId('account_id')->constrained('accounts');
-            $table->date('date_birth');
-            $table->string('specialist');
-            $table->time('start_hour');
-            $table->time('end_hour');
+            $table->string('specialist')->nullable();
+            $table->time('start_hour')->nullable();
+            $table->time('end_hour')->nullable();
 
             $table->timestamps();
         });

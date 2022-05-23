@@ -17,6 +17,7 @@ class CreateTrainingPathsTable extends Migration
             $table->id();
             $table->bigInteger('patient_id');
             $table->string('path_name');
+            $table->string('file_name');
             $table->integer('path_size');
             $table->enum('type',['ARUS','KECEPATAN','TRAYEKTORI']);
             $table->timestamps();

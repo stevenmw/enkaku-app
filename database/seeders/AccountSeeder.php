@@ -20,6 +20,7 @@ class AccountSeeder extends Seeder
             Account::create([
                 'name' => 'superadmin',
                 'address' => 'alamat admin',
+                'date_birth' => '1976-08-12',
                 'gender' => 'laki-laki',
                 'email' => 'superadmin@mail.com',
                 'password' => Hash::make('superadmin'),
@@ -32,6 +33,7 @@ class AccountSeeder extends Seeder
             Account::create([
                 'name' => 'steven',
                 'address' => 'alamat dokter',
+                'date_birth' => '1976-08-12',
                 'gender' => 'laki-laki',
                 'email' => 'steven@mail.com',
                 'password' => Hash::make('12345678'),
@@ -44,6 +46,7 @@ class AccountSeeder extends Seeder
             Account::create([
                 'name' => 'imani',
                 'address' => 'alamat pasien',
+                'date_birth' => '1976-08-12',
                 'gender' => 'laki-laki',
                 'email' => 'imani@mail.com',
                 'password' => Hash::make('12345678'),

@@ -22,15 +22,19 @@ function drawChart(graph={},X=[],Y=[]){
 // Send Request To Server to get File Data
 function showData(){
     const form = new FormData(document.getElementById('form-show'));
+    errorMsg = document.getElementById('error-message');
+    trayektoriGraph.clear();
 
     axios.post('/process-file',form)
     .then(function(response){
-        // console.log(response.data);
+        errorMsg.setAttribute('hidden',true);
         if(response.data){
             processTrayektori(response.data);
         }
     }).catch(function(error){
         console.log(error);
+        errorMsg.innerHTML = error.response.data.error;
+        errorMsg.removeAttribute('hidden');
     });
 }
 

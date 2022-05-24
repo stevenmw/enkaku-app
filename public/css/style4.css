@@ -44,6 +44,7 @@ body{
   height: 52px;
   margin: 25px 0;
 }
+
 form .input-box input{
   height: 100%;
   width: 100%;
@@ -61,6 +62,25 @@ form .input-box input{
 .input-box input:valid{
   border-color: #3AAFA9;
 }
+
+form .input-box select{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.input-box select:focus,
+.input-box select:valid{
+  border-color: #3AAFA9;
+}
+
 form .policy{
   display: flex;
   align-items: center;

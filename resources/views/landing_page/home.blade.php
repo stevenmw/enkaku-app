@@ -59,7 +59,7 @@
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
         <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
-        <a href="/register" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
+        <a href="/register-patient" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>

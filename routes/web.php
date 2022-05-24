@@ -44,10 +44,9 @@ Route::post('/import-file', [FileController::class, 'import']);
 Route::post('/process-file', [FileController::class, 'processFile']);
 Route::post('/download', [FileController::class, 'downloadFile']);
 
-Route::get('/register', [RegisterController::class, 'index']);
-Route::get('/register-patient',[RegisterController::class,'registerPatient']);
-Route::get('/register-doctor',[RegisterController::class,'registerDoctor']);
-Route::get('/register-admin',[RegisterController::class,'registerAdmin']);
+Route::get('/register-patient', [RegisterController::class, 'registerPatient']);
+Route::get('/register-doctor', [RegisterController::class, 'registerDoctor']);
+Route::get('/register-admin', [RegisterController::class, 'registerAdmin']);
 
 Route::post('/register-patient', [RegisterController::class, 'storePatient']);
 Route::post('/register-admin', [RegisterController::class, 'storeAdmin']);

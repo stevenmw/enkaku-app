@@ -32,6 +32,14 @@
         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
         <span id="message"></span>
       </div>
+      <div class="input-box">
+        <select name="doctor" class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
       {{-- <div class="policy">
         <label for="confirmation"></label>
         <input type="checkbox" id="confirmation">

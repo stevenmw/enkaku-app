@@ -59,7 +59,7 @@
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
         <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
-        <a href="/register" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
+        <a href="/register-patient" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
@@ -433,7 +433,7 @@
             <h3>contact info</h3>
             <a href="#"> <i class="fas fa-phone"></i> +62-031-5923644 </a>
             {{-- <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a> --}}
-            <a href="#"> <i class="fas fa-envelope"></i> enkaku_telerehab@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> enkaku@gmail.com </a>
             {{-- <a href="#"> <i class="fas fa-envelope"></i> anasbhai@gmail.com </a> --}}
             <a href="#"> <i class="fas fa-map-marker-alt"></i> Surabaya, Indonesia </a>
         </div>

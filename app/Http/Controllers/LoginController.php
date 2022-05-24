@@ -26,7 +26,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
-        dd($credentials);
+        // dd($credentials);
         return back()->with('loginError', 'Login Failed!');
     }
 

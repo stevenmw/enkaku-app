@@ -6,6 +6,11 @@
   <div class="container-fluid">
       <div class="col-md-12">
         <h4>Welcome Home, {{ auth()->user()->name }} </h4>
+        @if (session('success'))
+          <div class="alert alert-success">
+            {{ session('success') }}
+          </div>
+        @endif
       </div>
     </div>
     <div class="row">
@@ -61,7 +66,7 @@
       </div> --}}
     </div>
     
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-md-12 mb-3">
         <div class="card">
           <div class="card-header">
@@ -557,7 +562,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 </main>
 

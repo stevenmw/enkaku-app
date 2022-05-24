@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory;
+    protected $table = 'patients';
     protected $fillable=[
         'account_id',
         'date_birth',
@@ -22,6 +23,6 @@ class Patient extends Model
     }
 
     public function doctors(){
-        return $this->belongsToMany(Doctor::class,'patient_doctors','doctor_id','id');
+        return $this->belongsToMany(Doctor::class,'patient_doctors','patient_id','doctor_id');
     }
 }

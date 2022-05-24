@@ -54,7 +54,7 @@
     
             <div class="login-signup">
                 <span class="text">Need an account?
-                    <a href="/register" class="text signup-link">Signup now</a>
+                    <a href="/register-patient" class="text signup-link">Signup now</a>
                 </span>
             </div>
         </div>  

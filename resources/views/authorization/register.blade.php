@@ -14,19 +14,19 @@
   @endif
 
     @if ($account == 'PATIENT')
-    <h2>Patient Registration</h2>
+      <h2>Patient Registration</h2>
       <form id="form" action="/register-patient" method='POST'>    
     @endif
 
     @if ($account == 'DOCTOR')
-    <h2>Doctor Registration</h2>
+      <h2>Doctor Registration</h2>
       <form id="form" action="/register-doctor" method='POST'>    
     @endif
 
     @if ($account == 'ADMIN')
-    <h2>Admin Registration</h2>
-    <form id="form" action="/register-admin" method='POST'>    
-  @endif
+      <h2>Admin Registration</h2>
+      <form id="form" action="/register-admin" method='POST'>    
+    @endif
     
       @csrf
       <div class="input-box">
@@ -67,9 +67,24 @@
       <div class="input-box button">
         <input type="Submit" value="Register Now">
       </div>
-      <div class="text">
-        <h3>Already registered? <a href="/login">Signin now</a></h3>
-      </div>
+
+      @if ($account == 'PATIENT')
+        <div class="text">
+          <h3>Already registered? <a href="/login">Signin now</a></h3>
+        </div>   
+      @endif
+
+      @if ($account == 'DOCTOR')
+        <div class="text">
+          <h3><a href="/dashboard">Back to dashboard</a></h3>
+        </div>     
+      @endif
+
+      @if ($account == 'ADMIN')
+        <div class="text">
+          <h3><a href="/dashboard">Back to dashboard</a></h3>
+        </div>     
+      @endif
     </form>
 </div>
 

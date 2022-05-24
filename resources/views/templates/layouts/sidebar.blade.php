@@ -28,10 +28,43 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-book-fill"></i></span>
-              <span>Schedule</span>
+            <a
+              class="nav-link px-3 sidebar-link"
+              data-bs-toggle="collapse"
+              href="#layouts"
+            >
+              <span class="me-2"><i class="bi bi-file-earmark-bar-graph-fill"></i></span>
+              <span>Registration</span>
+              <span class="ms-auto">
+                <span class="right-icon">
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </span>
             </a>
+            <div class="collapse" id="layouts">
+              <ul class="navbar-nav ps-3">
+                <li>
+                  <a href="/register-admin" class="nav-link px-3">
+                    <span class="me-2">
+                      <i class="bi bi-clipboard-data"></i>
+                    </span>
+                    <span>Admin Registration</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="collapse" id="layouts">
+              <ul class="navbar-nav ps-3">
+                <li>
+                  <a href="/register-doctor" class="nav-link px-3">
+                    <span class="me-2">
+                      <i class="bi bi-clipboard2-data-fill"></i>
+                    </span>
+                    <span>Doctor Registration</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
         @endif
 

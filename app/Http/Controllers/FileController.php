@@ -15,26 +15,27 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         $request->validate([
             'patient_id' => 'required|integer',
             'file' => 'required',
-            'type' => ['required',Rule::in([TrainingPath::arus,TrainingPath::kecepatan,TrainingPath::trayektori])],
+            'type' => ['required', Rule::in([TrainingPath::arus, TrainingPath::kecepatan, TrainingPath::trayektori])],
         ]);
         try {
-            if($request->file('file')){
+            if ($request->file('file')) {
                 $file = $request->file('file');
                 DB::beginTransaction();
-                $onlyName = explode(".",$file->getClientOriginalName())[0];
+                $onlyName = explode(".", $file->getClientOriginalName())[0];
                 // nama file saat disimpan di server
-                $fileName = $request->type.'-'.auth()->user()->id.'-'. Carbon::now()->format('ymd').'.'. $file->getClientOriginalExtension();
+                $fileName = $request->type . '-' . auth()->user()->id . '-' . Carbon::now()->format('ymd') . '.' . $file->getClientOriginalExtension();
                 // namatraining-id-tanggal
-                
+
                 switch ($request->type) {
                     case TrainingPath::trayektori:
                         $filePath = './File/Trayektori';
                         break;
-                    
+
                     case TrainingPath::arus:
                         $filePath = './File/Arus';
                         break;
@@ -47,27 +48,27 @@ class FileController extends Controller
                         $filePath = './File';
                         break;
                 }
-                $trainPath=TrainingPath::create([
+                $trainPath = TrainingPath::create([
                     'patient_id' => $request->patient_id,
                     'file_name' => $fileName,
-                    'path_name' => $filePath.'/'.$fileName,
+                    'path_name' => $filePath . '/' . $fileName,
                     'path_size' => $file->getSize(),
                     'type' => $request->type,
                 ]);
                 $file->storeAs($filePath, $fileName);
                 DB::commit();
-                return back()->with('status','Import File Success');
+                return back()->with('status', 'Import File Success');
             }
-            return back()->with('error','Import File Not Success');
+            return back()->with('error', 'Import File Not Success');
         } catch (\Throwable $th) {
             DB::rollBack();
             return $th;
         }
-        
     }
 
-    public function processFile(Request $request){
-        $data=null;
+    public function processFile(Request $request)
+    {
+        $data = null;
         // foreach (TrainingPath::arrayType as $value) {
         //     $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$value)->first(); 
         //     if($temp){
@@ -81,36 +82,40 @@ class FileController extends Controller
         //             $data = $this->processKecepatanFile($temp->path_name);
         //         }
         //     }   
-            
+
         // }
+        $request->validate([
+            'patient_id' => 'required'
+        ]);
 
-        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
 
-        if($request->type == TrainingPath::kecepatan ){
+        if ($request->type == TrainingPath::kecepatan) {
             $data = $this->processKecepatanFile($temp->path_name);
         }
-        if($request->type == TrainingPath::arus ){
+        if ($request->type == TrainingPath::arus) {
             $data = $this->processArusFile($temp->path_name);
         }
-        if($request->type == TrainingPath::trayektori ){
+        if ($request->type == TrainingPath::trayektori) {
             $data = $this->processTrayektoriFile($temp->path_name);
         }
 
         return response()->json($data);
     }
 
-    public function downloadFile(Request $request){
-        $path=null;
+    public function downloadFile(Request $request)
+    {
+        $path = null;
 
-        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
-        
-        if($request->type == TrainingPath::kecepatan ){
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
+
+        if ($request->type == TrainingPath::kecepatan) {
             $path = $this->processKecepatanFile($temp->path_name);
         }
-        if($request->type == TrainingPath::arus ){
+        if ($request->type == TrainingPath::arus) {
             $path = $this->processArusFile($temp->path_name);
         }
-        if($request->type == TrainingPath::trayektori ){
+        if ($request->type == TrainingPath::trayektori) {
             $path = $this->processTrayektoriFile($temp->path_name);
         }
 
@@ -118,9 +123,10 @@ class FileController extends Controller
         return $file;
     }
 
-    public function processArusFile($pathFile){
+    public function processArusFile($pathFile)
+    {
         $path = Storage::path($pathFile);
-        $data = Excel::toArray(new ArusImport,$path);
+        $data = Excel::toArray(new ArusImport, $path);
         $data = $data[0];
         $timeFlekNoVol = [];
         $arusFlekNoVol = [];
@@ -131,17 +137,17 @@ class FileController extends Controller
         $timeEksVol = [];
         $arusEksVol = [];
 
-        for ($i=2; $i < count($data); $i++) { 
-            array_push($timeFlekNoVol,$data[$i][0]);
+        for ($i = 2; $i < count($data); $i++) {
+            array_push($timeFlekNoVol, $data[$i][0]);
             array_push($arusFlekNoVol, $data[$i][1]);
-            array_push($timeEksNoVol,$data[$i][3]);
-            array_push($arusEksNoVol,$data[$i][4]);
-            array_push($timeFlekVol,$data[$i][6]);
-            array_push($arusFlekVol,$data[$i][7]);
-            array_push($timeEksVol,$data[$i][9]);
-            array_push($arusEksVol,$data[$i][10]);
+            array_push($timeEksNoVol, $data[$i][3]);
+            array_push($arusEksNoVol, $data[$i][4]);
+            array_push($timeFlekVol, $data[$i][6]);
+            array_push($arusFlekVol, $data[$i][7]);
+            array_push($timeEksVol, $data[$i][9]);
+            array_push($arusEksVol, $data[$i][10]);
         }
-        
+
         $response = [
             'timeFlekNoVol' => $timeFlekNoVol,
             'arusFlekNoVol' => $arusFlekNoVol,
@@ -156,9 +162,10 @@ class FileController extends Controller
         return $response;
     }
 
-    public function processKecepatanFile($pathFile){
+    public function processKecepatanFile($pathFile)
+    {
         $path = Storage::path($pathFile);
-        $excel = Excel::toArray(new VelocityImport,$path);
+        $excel = Excel::toArray(new VelocityImport, $path);
         $data = $excel[0];
         $velocity = [];
         $velocityConv = [];
@@ -166,12 +173,12 @@ class FileController extends Controller
         $xData = [];
         $x = 0;
 
-        $i=1;
+        $i = 1;
         while ($data[$i][41]) {
-            array_push($velocity,$data[$i][39]);
+            array_push($velocity, $data[$i][39]);
             array_push($velocityConv, $data[$i][40]);
-            array_push($setPoint,$data[$i][41]);
-            array_push($xData,$x);
+            array_push($setPoint, $data[$i][41]);
+            array_push($xData, $x);
             $x++;
             $i++;
         }
@@ -186,7 +193,8 @@ class FileController extends Controller
         return $result;
     }
 
-    public function processTrayektoriFile($pathFile){
+    public function processTrayektoriFile($pathFile)
+    {
         $path = Storage::path($pathFile);
         $lines = File::lines($path);
         //         time(s)	shldr	elbow	error	realtime(s)
@@ -197,17 +205,17 @@ class FileController extends Controller
         $elbow = [];
         $error = [];
         $realTime = [];
-        
+
         $lines = $lines->toArray();
-        for ($i=1; $i < count($lines)-1; $i++) { 
-            $arr = explode("\t",$lines[$i]);
-            
+        for ($i = 1; $i < count($lines) - 1; $i++) {
+            $arr = explode("\t", $lines[$i]);
+
             // tanda @ pada @$arr dipakai jika nilai $arry==null agar tidak ada error
-            array_push($time,$this->replaceComa(@$arr[0]));
-            array_push($shoulder,$this->replaceComa(@$arr[1]));
-            array_push($elbow,$this->replaceComa(@$arr[2]));
-            array_push($error,$this->replaceComa(@$arr[3]));
-            array_push($realTime,$this->replaceComa(@$arr[4]));
+            array_push($time, $this->replaceComa(@$arr[0]));
+            array_push($shoulder, $this->replaceComa(@$arr[1]));
+            array_push($elbow, $this->replaceComa(@$arr[2]));
+            array_push($error, $this->replaceComa(@$arr[3]));
+            array_push($realTime, $this->replaceComa(@$arr[4]));
         }
         return [
             'time' => $time,
@@ -218,8 +226,9 @@ class FileController extends Controller
         ];
     }
 
-    public function replaceComa($strVar){
-        $res = str_replace(',','.',$strVar);
+    public function replaceComa($strVar)
+    {
+        $res = str_replace(',', '.', $strVar);
         return $res;
     }
 }

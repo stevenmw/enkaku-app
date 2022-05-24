@@ -17,23 +17,26 @@ class RegisterController extends Controller
         return view('authorization.register');
     }
 
-    public function registerPatient(){
+    public function registerPatient()
+    {
         $doctor = Doctor::all();
-        return view('authorization.register',['account' => 'PATIENT','doctor'=>$doctor]);
+        return view('authorization.register', ['account' => 'PATIENT', 'doctor' => $doctor]);
     }
 
-    public function registerDoctor(){
-        if(auth()->user()->isAdmin()){
-            return view('authorization.register',['account' => 'DOCTOR']);
+    public function registerDoctor()
+    {
+        if (auth()->user()->isAdmin()) {
+            return view('authorization.register', ['account' => 'DOCTOR']);
         }
-        return back()->with('error','Unauthorized');
+        return back()->with('error', 'Unauthorized');
     }
 
-    public function registerAdmin(){
-        if(auth()->user()->isAdmin()){
-            return view('authorization.register',['account' => 'ADMIN']);
+    public function registerAdmin()
+    {
+        if (auth()->user()->isAdmin()) {
+            return view('authorization.register', ['account' => 'ADMIN']);
         }
-        return back()->with('error','Unauthorized');
+        return back()->with('error', 'Unauthorized');
     }
 
     public function storePatient(Request $request)
@@ -55,7 +58,7 @@ class RegisterController extends Controller
         //add data into patient_doctors table
         $patient->doctors()->attach($request->doctor);
 
-        return redirect('/login')->with('success', 'Registration successfully! Please login');
+        return redirect('/login')->with('success', 'Doctor registration is success! Please login');
     }
 
     public function storeAdmin(Request $request)
@@ -71,7 +74,7 @@ class RegisterController extends Controller
         $account = Account::create($validatedAccount);
 
         Admin::create(['account_id' => $account->id]);
-        return redirect('/login')->with('success', 'Registration successfully! Please login');
+        return redirect('/dashboard')->with('success', 'Registration successfully! Please login');
     }
 
     public function storeDoctor(Request $request)
@@ -87,6 +90,6 @@ class RegisterController extends Controller
         $account = Account::create($validatedAccount);
 
         Doctor::create(['account_id' => $account->id]);
-        return redirect('/login')->with('success', 'Registration successfully! Please login');
+        return redirect('/dashboard')->with('success', 'Registration successfully! Please login');
     }
 }

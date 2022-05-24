@@ -42,10 +42,12 @@ Route::get('/velocity', [DashboardController::class, 'velocity'])->middleware('a
 
 Route::post('/import-file', [FileController::class, 'import']);
 Route::post('/process-file', [FileController::class, 'processFile']);
-Route::post('/download', [FileController::class,'downloadFile']);
+Route::post('/download', [FileController::class, 'downloadFile']);
 
 Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register-patient', [RegisterController::class, 'storePatient']);
+Route::post('/register-admin', [RegisterController::class, 'storeAdmin']);
+Route::post('/register-doctor', [RegisterController::class, 'storeDoctor']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);

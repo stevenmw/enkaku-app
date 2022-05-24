@@ -3,7 +3,7 @@
 @section('form_register')
 <div class="wrapper">
     <h2>Registration</h2>
-    <form id="form" action="/register" method='POST'>
+    <form id="form" action="/register-patient" method='POST'>
       @csrf
       <div class="input-box">
         <input type="text" id="name" name="name" placeholder="Enter your name" required>

@@ -433,7 +433,7 @@
             <h3>contact info</h3>
             <a href="#"> <i class="fas fa-phone"></i> +62-031-5923644 </a>
             {{-- <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a> --}}
-            <a href="#"> <i class="fas fa-envelope"></i> enkaku_telerehab@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> enkaku@gmail.com </a>
             {{-- <a href="#"> <i class="fas fa-envelope"></i> anasbhai@gmail.com </a> --}}
             <a href="#"> <i class="fas fa-map-marker-alt"></i> Surabaya, Indonesia </a>
         </div>

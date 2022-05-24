@@ -9,6 +9,10 @@
 
           @include('templates.layouts.notif')
 
+          <div id="error-message" class="alert alert-danger" hidden>
+            error
+          </div>
+
           <div class="img-fluid" alt="Responsive image">
             <div class="content">
             </div>

@@ -44,14 +44,22 @@ function drawChart(graph={},X=[],Y=[]){
 // Send Request To Server to get File Data
 function showData(){
     const form = new FormData(document.getElementById('form-show'));
+    errorMsg = document.getElementById('error-message');
+    currentFlexNoMoveGraph.clear();
+    currentFlexMoveGraph.clear();
+    currentExtenNoMoveGraph.clear();
+    currentExtenMoveGraph.clear()
 
     axios.post('/process-file',form)
     .then(function(response){
+        errorMsg.setAttribute('hidden',true);
         if(response.data){
             processArus(response.data);
         }
     }).catch(function(error){
         console.log(error);
+        errorMsg.innerHTML = error.response.data.error;
+        errorMsg.removeAttribute('hidden');
     });
 }
 

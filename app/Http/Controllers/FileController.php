@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -83,8 +84,25 @@ class FileController extends Controller
         //     }   
             
         // }
+        $validator = Validator::make($request->all(),[
+            'patient_id' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'code' => 400,
+                'error' => $validator->errors()->first(),
+            ],400);
+        }
 
         $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
+
+        if(!$temp){
+            return response()->json([
+                'code' => 400,
+                'error' => 'file training not found',
+            ],400);
+        }
 
         if($request->type == TrainingPath::kecepatan ){
             $data = $this->processKecepatanFile($temp->path_name);
@@ -104,6 +122,10 @@ class FileController extends Controller
 
         $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type',$request->type)->first();
         
+        if(!$temp){
+            return back()->with('error','File Training Not Found');
+        }
+
         if($request->type == TrainingPath::kecepatan ){
             $path = $this->processKecepatanFile($temp->path_name);
         }

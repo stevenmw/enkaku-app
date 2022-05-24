@@ -8,6 +8,10 @@
           <h2 class="text-justify" class="font-weight-bold">Current</h2>
           
           @include('templates.layouts.notif')
+          
+          <div id="error-message" class="alert alert-danger" hidden>
+            error
+          </div>
 
           <div class="img-fluid" alt="Responsive image">
             <div class="content">

@@ -18,6 +18,9 @@ use App\Http\Controllers\FileController;
 */
 
 Route::get('/', function () {
+    // if (auth()->user()) {
+    //     return redirect('dashboard');
+    // }
     return view('landing_page.home');
 });
 

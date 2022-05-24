@@ -29,6 +29,11 @@
         <a href="#doctors">doctors</a>
         <a href="#review">review</a>
         <a href="#review" type="hidden"></a>
+        @if (auth()->user())         
+            <a href="/dashboard">
+                <button type="button" class="btn btn-primary">Dashboard</button>
+            </a>
+        @endif
         {{-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Profile
@@ -58,8 +63,10 @@
     <div class="content">
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
-        <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
-        <a href="/register-patient" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
+        @if (!auth()->user())            
+            <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
+            <a href="/register-patient" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
+        @endif
     </div>
 
 </section>

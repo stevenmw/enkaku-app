@@ -9,7 +9,7 @@
     >
       <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
     </button>
-    <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="/dashboard">Enkaku - Telerehab</a
+    <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="/">Enkaku - Telerehab</a
     >
     <button
       class="navbar-toggler"

@@ -71,6 +71,7 @@
       @if ($account == 'PATIENT')
         <div class="text">
           <h3>Already registered? <a href="/login">Signin now</a></h3>
+          <h3><a href="/">Back to Landing Page</a></h3>
         </div>   
       @endif
 

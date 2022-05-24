@@ -64,7 +64,8 @@ function processArus(data={}){
             data: data.arusFlekNoVol,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
     ];
     xAxis = data.timeFlekNoVol;
@@ -77,7 +78,8 @@ function processArus(data={}){
             data: data.arusEksNoVol,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
     ];
     xAxis = data.timeEksNoVol;
@@ -90,7 +92,8 @@ function processArus(data={}){
             data: data.arusFlekVol,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
     ];
     xAxis = data.timeFlekVol;
@@ -103,7 +106,8 @@ function processArus(data={}){
             data: data.arusEksVol,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
     ];
     xAxis = data.timeEksVol;

@@ -38,7 +38,6 @@
                                     <option value="KECEPATAN" selected>Kecepatan</option>
                                   </select>
                                   <br>
-                                
                                   <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                                     <option value="" selected>---Pasien---</option>
                                     @foreach ($patients as $patient)
@@ -85,6 +84,7 @@
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="KECEPATAN" selected>Kecepatan</option>
                           </select>
+                          <br>
                           @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
@@ -127,6 +127,7 @@
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="KECEPATAN" selected>Kecepatan</option>
                           </select>
+                          <br>
                           @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>

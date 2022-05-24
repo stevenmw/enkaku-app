@@ -42,14 +42,16 @@ function processTrayektori(data={}){
             data: data.elbow,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
         {
             label: 'Shoulder',
             data: data.shoulder,
             borderColor: 'green',
             borderWidth: 0.5,
-            backgroundColor:'green'
+            backgroundColor:'green',
+            pointRadius: 0
         }
     ];
     xAxis = data.realTime;

@@ -83,7 +83,7 @@
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="ARUS" selected>Training Arus</option>
                           </select>
-
+                          <br>
                           @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
@@ -126,6 +126,7 @@
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="ARUS" selected>Arus</option>
                           </select>
+                          <br>
                           @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>

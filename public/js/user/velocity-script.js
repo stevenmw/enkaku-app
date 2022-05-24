@@ -40,14 +40,16 @@ function processVelocity(data={}){
             data: data.velocityConv,
             borderColor: 'red',
             borderWidth: 0.5,
-            backgroundColor:'red'
+            backgroundColor:'red',
+            pointRadius: 0
         },
         {
             label: 'set point',
             data: data.setPoint,
             borderColor: 'green',
             borderWidth: 0.5,
-            backgroundColor:'green'
+            backgroundColor:'green',
+            pointRadius: 0
         }
     ];
     xAxis = data.xData;

@@ -73,7 +73,6 @@ class DashboardController extends Controller
         if(auth()->user()->isAdmin()){
             $patients = Patient::all();
         }
-
         return view('user.velocity',["patients" => $patients]);
     }
 }

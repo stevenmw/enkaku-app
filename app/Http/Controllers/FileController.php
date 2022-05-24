@@ -48,7 +48,7 @@ class FileController extends Controller
                         break;
                 }
                 $trainPath=TrainingPath::create([
-                    'patient_id' => 1,
+                    'patient_id' => $request->patient_id,
                     'file_name' => $fileName,
                     'path_name' => $filePath.'/'.$fileName,
                     'path_size' => $file->getSize(),

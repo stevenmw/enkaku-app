@@ -45,8 +45,8 @@ Route::post('/process-file', [FileController::class, 'processFile']);
 Route::post('/download', [FileController::class, 'downloadFile']);
 
 Route::get('/register-patient', [RegisterController::class, 'registerPatient']);
-Route::get('/register-doctor', [RegisterController::class, 'registerDoctor']);
-Route::get('/register-admin', [RegisterController::class, 'registerAdmin']);
+Route::get('/register-doctor', [RegisterController::class, 'registerDoctor'])->middleware('auth');
+Route::get('/register-admin', [RegisterController::class, 'registerAdmin'])->middleware('auth');
 
 Route::post('/register-patient', [RegisterController::class, 'storePatient']);
 Route::post('/register-admin', [RegisterController::class, 'storeAdmin']);

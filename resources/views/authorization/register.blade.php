@@ -1,7 +1,18 @@
 @extends('authorization.templates.index_r')
 
 @section('form_register')
+
 <div class="wrapper">
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
     @if ($account == 'PATIENT')
     <h2>Patient Registration</h2>
       <form id="form" action="/register-patient" method='POST'>    
@@ -32,14 +43,22 @@
         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
         <span id="message"></span>
       </div>
-      <div class="input-box">
-        <select name="doctor" class="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
+
+      @if ($account == 'PATIENT')
+        
+        <div class="input-box">
+          <select name="doctor" class="form-select" aria-label="Default select example">
+            <option selected>--- Choose Doctor ---</option>
+            @foreach ($doctor as $doc)
+              <option value="{{$doc->id}}">{{$doc->account->name}}</option>    
+            @endforeach
+            
+          </select>
+        </div>    
+      
+        
+      @endif
+      
       {{-- <div class="policy">
         <label for="confirmation"></label>
         <input type="checkbox" id="confirmation">

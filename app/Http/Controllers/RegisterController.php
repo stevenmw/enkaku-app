@@ -11,21 +11,29 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+
     public function index()
     {
         return view('authorization.register');
     }
 
     public function registerPatient(){
-        return view('authorization.register',['account' => 'PATIENT']);
+        $doctor = Doctor::all();
+        return view('authorization.register',['account' => 'PATIENT','doctor'=>$doctor]);
     }
 
     public function registerDoctor(){
-        return view('authorization.register',['account' => 'DOCTOR']);
+        if(auth()->user()->isAdmin()){
+            return view('authorization.register',['account' => 'DOCTOR']);
+        }
+        return back()->with('error','Unauthorized');
     }
 
     public function registerAdmin(){
-        return view('authorization.register',['account' => 'ADMIN']);
+        if(auth()->user()->isAdmin()){
+            return view('authorization.register',['account' => 'ADMIN']);
+        }
+        return back()->with('error','Unauthorized');
     }
 
     public function storePatient(Request $request)
@@ -35,12 +43,18 @@ class RegisterController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:5|max:255',
             'confirm_password' => 'required|min:5|max:255',
+            'doctor' => 'required|integer',
         ]);
+        // dd($request->all());
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
         $account = Account::create($validatedAccount);
 
-        Patient::create(['account_id' => $account->id]);
+        $patient = Patient::create(['account_id' => $account->id]);
+
+        //add data into patient_doctors table
+        $patient->doctors()->attach($request->doctor);
+
         return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 

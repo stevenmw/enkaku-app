@@ -39,13 +39,8 @@ class RegisterController extends Controller
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
         $account = Account::create($validatedAccount);
-        
-        // $request->validate([
-        //     'account_id' => 'required'
-        // ]);
 
-        $clodi = Patient::create(['account_id' => $account->id]);
-        
+        Patient::create(['account_id' => $account->id]);
         return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 
@@ -59,12 +54,9 @@ class RegisterController extends Controller
         ]);
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
-        Account::create($validatedAccount);
+        $account = Account::create($validatedAccount);
 
-        $validateAdmin = $request->validate([
-            'account_id' => 'required'
-        ]);
-        Admin::create($validateAdmin);
+        Admin::create(['account_id' => $account->id]);
         return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 
@@ -78,12 +70,9 @@ class RegisterController extends Controller
         ]);
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
-        Account::create($validatedAccount);
+        $account = Account::create($validatedAccount);
 
-        $validateDoctor = $request->validate([
-            'account_id' => 'required'
-        ]);
-        Doctor::create($validateDoctor);
+        Doctor::create(['account_id' => $account->id]);
         return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 }

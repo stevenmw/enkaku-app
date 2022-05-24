@@ -2,8 +2,21 @@
 
 @section('form_register')
 <div class="wrapper">
-    <h2>Registration</h2>
-    <form id="form" action="/register-patient" method='POST'>
+    @if ($account == 'PATIENT')
+    <h2>Patient Registration</h2>
+      <form id="form" action="/register-patient" method='POST'>    
+    @endif
+
+    @if ($account == 'DOCTOR')
+    <h2>Doctor Registration</h2>
+      <form id="form" action="/register-doctor" method='POST'>    
+    @endif
+
+    @if ($account == 'ADMIN')
+    <h2>Admin Registration</h2>
+    <form id="form" action="/register-admin" method='POST'>    
+  @endif
+    
       @csrf
       <div class="input-box">
         <input type="text" id="name" name="name" placeholder="Enter your name" required>

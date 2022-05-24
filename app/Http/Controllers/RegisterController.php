@@ -16,6 +16,18 @@ class RegisterController extends Controller
         return view('authorization.register');
     }
 
+    public function registerPatient(){
+        return view('authorization.register',['account' => 'PATIENT']);
+    }
+
+    public function registerDoctor(){
+        return view('authorization.register',['account' => 'DOCTOR']);
+    }
+
+    public function registerAdmin(){
+        return view('authorization.register',['account' => 'ADMIN']);
+    }
+
     public function storePatient(Request $request)
     {
         $validatedAccount = $request->validate([
@@ -27,14 +39,14 @@ class RegisterController extends Controller
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
         $account = Account::create($validatedAccount);
-
-        $request->validate([
-            'account_id' => 'required'
-        ]);
+        
+        // $request->validate([
+        //     'account_id' => 'required'
+        // ]);
 
         $clodi = Patient::create(['account_id' => $account->id]);
-        dd($clodi);
-        // return redirect('/login')->with('success', 'Registration successfully! Please login');
+        
+        return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 
     public function storeAdmin(Request $request)

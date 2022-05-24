@@ -16,6 +16,7 @@ class AlterTableAccountsChangeAddressDatebirthGenderNullable extends Migration
         Schema::table('accounts', function (Blueprint $table) {
             $table->string('address')->nullable()->change();
             $table->string('gender')->nullable()->change();
+            $table->date('date_birth')->nullable()->change();
         });
     }
 

@@ -26,13 +26,15 @@ class RegisterController extends Controller
         ]);
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
-        Account::create($validatedAccount);
+        $account = Account::create($validatedAccount);
 
-        $validatePatient = $request->validate([
+        $request->validate([
             'account_id' => 'required'
         ]);
-        Patient::create($validatePatient);
-        return redirect('/login')->with('success', 'Registration successfully! Please login');
+
+        $clodi = Patient::create(['account_id' => $account->id]);
+        dd($clodi);
+        // return redirect('/login')->with('success', 'Registration successfully! Please login');
     }
 
     public function storeAdmin(Request $request)

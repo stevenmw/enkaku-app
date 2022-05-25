@@ -156,15 +156,16 @@
                   </div>
                 </div>
                 {{-- Modal Export Data End --}}
-             
-                <div class="card h-100">
-                  <div class="card-header">
-                    <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                    Trayektori Chart
-                  </div>
-                  <div class="card-body">
-                    {{-- <canvas class="chart" width="400" height="200"></canvas> --}}
-                    <canvas id="trayektori-chart" width="400" height="200"></canvas>
+                
+                <div class="col-12 mb-3">
+                  <div style=" height: 12rem; width:69rem" class="card h-100">
+                    <div class="card-header">
+                      <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                      Trayektori Chart
+                    </div>
+                    <div class="card-body">
+                      <canvas id="trayektori-chart" width="1200" height="400"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>

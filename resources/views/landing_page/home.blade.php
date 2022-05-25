@@ -196,8 +196,8 @@
 
         <div class="box">
             <img src="images/doc-1.jpg" alt="">
-            <h3>john deo</h3>
-            <span>expert doctor</span>
+            <h3>Livy Renata</h3>
+            <span>Internist</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -208,8 +208,8 @@
 
         <div class="box">
             <img src="images/doc-2.jpg" alt="">
-            <h3>john deo</h3>
-            <span>expert doctor</span>
+            <h3>lionel messi</h3>
+            <span>neuorlogist</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -221,7 +221,7 @@
         <div class="box">
             <img src="images/doc-3.jpg" alt="">
             <h3>john deo</h3>
-            <span>expert doctor</span>
+            <span>physiotherapy</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -232,8 +232,8 @@
 
         <div class="box">
             <img src="images/doc-4.jpg" alt="">
-            <h3>john deo</h3>
-            <span>expert doctor</span>
+            <h3>Dea afrizal</h3>
+            <span>physiotherapy</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -244,8 +244,8 @@
 
         <div class="box">
             <img src="images/doc-5.jpg" alt="">
-            <h3>john deo</h3>
-            <span>expert doctor</span>
+            <h3>Abdur arsyad</h3>
+            <span>Radiologist</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -256,8 +256,8 @@
 
         <div class="box">
             <img src="images/doc-6.jpg" alt="">
-            <h3>john deo</h3>
-            <span>expert doctor</span>
+            <h3>dr. strange</h3>
+            <span>Anesthetic</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -308,8 +308,8 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="images/pic-1.png" alt="">
-            <h3>john deo</h3>
+            <img src="images/sherelle.png" alt="">
+            <h3>Sharlotte Vyvian</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -317,12 +317,12 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">A hybrid approach platform to primary care that offers quick reporting for post stroke patient after carrying out a series of physiotherapeutic training. Helpful for caregivers in monitoring the training process and doctors in providing the right training menu according to the progress of each patient</p>
         </div>
 
         <div class="box">
-            <img src="images/pic-2.png" alt="">
-            <h3>john deo</h3>
+            <img src="images/ace.png" alt="">
+            <h3>Ajeng Zurliana</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -330,12 +330,12 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">Great applications! User friendly Interface for commoners. Hopefully enkaku can increase access to medical services while maintaining quality.</p>
         </div>
 
         <div class="box">
-            <img src="images/pic-3.png" alt="">
-            <h3>john deo</h3>
+            <img src="images/fl.png" alt="">
+            <h3>Dian Sastro</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -343,7 +343,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">I'm still going to use it because even though I'm not satisfied with the lack of features, I'll have a direct consultation with a physiotherapist after the results of the training show up. However, this is a lifesaver. Easy for newby!</p>
         </div>
 
     </div>
@@ -424,24 +424,20 @@
             <a href="#about"> <i class="fas fa-chevron-right"></i> about </a>
             <a href="#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
             <a href="#review"> <i class="fas fa-chevron-right"></i> review </a>
-            {{-- <a href="#"> <i class="fas fa-chevron-right"></i> blogs </a> --}}
         </div>
 
         <div class="box">
             <h3>our services</h3>
-            <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> neuorologis </a>
             <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> physiotherapy </a>
             <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
         </div>
 
         <div class="box">
             <h3>contact info</h3>
             <a href="#"> <i class="fas fa-phone"></i> +62-031-5923644 </a>
-            {{-- <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a> --}}
             <a href="#"> <i class="fas fa-envelope"></i> enkaku@gmail.com </a>
-            {{-- <a href="#"> <i class="fas fa-envelope"></i> anasbhai@gmail.com </a> --}}
             <a href="#"> <i class="fas fa-map-marker-alt"></i> Surabaya, Indonesia </a>
         </div>
 

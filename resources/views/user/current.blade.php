@@ -158,7 +158,7 @@
                 {{-- Modal Export Data End --}}
       
               <div class="col-12 mb-3">
-                <div class="card h-100">
+                <div style="height: 12rem; width:69rem" class="card h-100">
                   <div class="card-header">
                     <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                     Current Chart (Flex No Move)
@@ -170,7 +170,7 @@
               </div>
       
               <div class="col-12 mb-3">
-                <div class="card h-100">
+                <div style="height: 12rem; width:69rem" class="card h-100">
                   <div class="card-header">
                     <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                     Current Chart (Exten No Move)
@@ -182,7 +182,7 @@
               </div>
       
               <div class="col-12 mb-3">
-                <div class="card h-100">
+                <div style="height: 12rem; width:69rem" class="card h-100">
                   <div class="card-header">
                     <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                     Current Chart (Flex Move)
@@ -192,15 +192,15 @@
                   </div>
                 </div>
               </div>
-      
+              
               <div class="col-12 mb-3">
-                <div class="card h-100">
+                <div style="height: 12rem; width:69rem" class="card h-100">
                   <div class="card-header">
                     <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                     Current Chart (Extem Move)
                   </div>
                   <div class="card-body">
-                    <canvas id="current-exten-move-chart" width="400" height="200"></canvas>
+                    <canvas id="current-exten-move-chart" width="1200" height="400"></canvas>
                   </div>
                 </div>
               </div>

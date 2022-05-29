@@ -22,7 +22,7 @@
             </div>
           </li>
           <li>
-            <a href="#" class="nav-link px-3">
+            <a class="nav-link px-3 {{ (Request::is('/user-list')) ? 'active' : ''}}" href="/user-list">
               <span class="me-2"><i class="bi bi-layout-split"></i></span>
               <span>User Lists</span>
             </a>

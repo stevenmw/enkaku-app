@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UpdateController;
+use App\Http\Controllers\UserListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,17 +26,15 @@ Route::get('/', function () {
     return view('landing_page.home');
 });
 
-// Route::get('/main', function () {
-//     return view('main');
-// });
+Route::get('/user-list', [UserListController::class, 'showUserList']);
 
-// Route::get('/user', function () {
-//     return view('user.index');
-// });
+Route::get('update-patient', [UpdateController::class, 'formUpdatePatient'])->middleware('auth');
+Route::get('update-doctor', [UpdateController::class, 'formUpdateDoctor'])->middleware('auth');
+Route::get('update-admin', [UpdateController::class, 'formUpdateAdmin'])->middleware('auth');
 
-// Route::get('/home', function () {
-//     return view('templates.layouts.home');
-// });
+Route::put('update-patient/{id}', [UpdateController::class, 'updatePatient'])->middleware('auth');
+Route::put('update-doctor/{id}', [UpdateController::class, 'updateDoctor'])->middleware('auth');
+Route::put('update-admin/{id}', [UpdateController::class, 'updateAdmin'])->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/profile', [DashboardController::class, 'profile'])->middleware('auth');

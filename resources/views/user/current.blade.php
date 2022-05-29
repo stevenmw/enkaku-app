@@ -164,7 +164,7 @@
                     Current Chart (Flex No Move)
                   </div>
                   <div class="card-body">
-                    <canvas id="current-flex-no-move-chart" width="400" height="200"></canvas>
+                    <canvas id="current-flex-no-move-chart" width="1200" height="400"></canvas>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@
                     Current Chart (Exten No Move)
                   </div>
                   <div class="card-body">
-                    <canvas id="current-exten-no-move-chart" width="400" height="200"></canvas>
+                    <canvas id="current-exten-no-move-chart" width="1200" height="400"></canvas>
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@
                     Current Chart (Flex Move)
                   </div>
                   <div class="card-body">
-                    <canvas id="current-flex-move-chart" width="400" height="200"></canvas>
+                    <canvas id="current-flex-move-chart" width="1200" height="400"></canvas>
                   </div>
                 </div>
               </div>

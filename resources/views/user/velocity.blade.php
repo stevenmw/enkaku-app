@@ -159,7 +159,7 @@
                 {{-- Modal Export Data End --}}
       
               <div class="col-12 mb-3">
-                <div style=" height: 22rem; width:69rem" class="card h-100">
+                <div style=" height: 12rem; width:69rem" class="card h-100">
                   <div class="card-header">
                     <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
                     Velocity Chart

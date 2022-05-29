@@ -156,6 +156,20 @@ small {
   background: var(--color-success-light);
 }
 
+.form-horizontal{
+  display:block;
+  width:10%;
+  margin:0 auto;
+  text-align: center;
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;  
+}
+
 /* =========================== NAVBAR ========================== */
 nav {
   width: 100%;

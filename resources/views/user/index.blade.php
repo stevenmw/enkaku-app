@@ -11,6 +11,11 @@
             {{ session('success') }}
           </div>
         @endif
+        @if (session('error'))
+          <div class="alert alert-warning">
+            {{ session('error') }}
+          </div>
+       @endif
       </div>
     </div>
     <div class="row">

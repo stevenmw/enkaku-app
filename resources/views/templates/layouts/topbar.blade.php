@@ -55,7 +55,13 @@
             <i class="bi bi-person-fill"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="/profile">My Profiles</a></li>
+            @if (auth()->user()->isPatient())
+              <li><a class="dropdown-item" href="/update-patient">My Profiles</a></li>               
+            @elseif (auth()->user()->isDoctor())
+              <li><a class="dropdown-item" href="/update-doctor">My Profiles</a></li>
+            @elseif (auth()->user()->isAdmin())
+              <li><a class="dropdown-item" href="/update-admin">My Profiles</a></li>
+            @endif
             <li><a class="dropdown-item" href="/">Settings</a></li>
             <li>
               <form action="/logout" method="POST">

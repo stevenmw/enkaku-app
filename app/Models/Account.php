@@ -23,7 +23,9 @@ class Account extends Authenticatable
         'confirm_password',
         'address',
         'gender',
-        'name'
+        'name',
+        'role',
+        'uuid'
     ];
 
     /**

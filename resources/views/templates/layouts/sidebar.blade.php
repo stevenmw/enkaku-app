@@ -128,12 +128,12 @@
             </ul>
           </div>
         </li>
-        <li>
+        {{-- <li>
           <a href="#" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-table"></i></span>
             <span>Tables</span>
           </a>
-        </li>
+        </li> --}}
         <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
         <li>
           <a href="/helpcenter" class="nav-link px-3">

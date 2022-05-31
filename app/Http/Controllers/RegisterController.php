@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -51,6 +52,8 @@ class RegisterController extends Controller
         // dd($request->all());
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
+        $validatedAccount['role'] = 'Patient';
+        $validatedAccount['uuid'] = Str::uuid();
         $account = Account::create($validatedAccount);
 
         $patient = Patient::create(['account_id' => $account->id]);
@@ -71,6 +74,8 @@ class RegisterController extends Controller
         ]);
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
+        $validatedAccount['role'] = 'Admin';
+        $validatedAccount['uuid'] = Str::uuid();
         $account = Account::create($validatedAccount);
 
         Admin::create(['account_id' => $account->id]);
@@ -87,6 +92,8 @@ class RegisterController extends Controller
         ]);
         $validatedAccount['password'] = Hash::make($validatedAccount['password']);
         $validatedAccount['confirm_password'] = Hash::make($validatedAccount['confirm_password']);
+        $validatedAccount['role'] = 'Doctor';
+        $validatedAccount['uuid'] = Str::uuid();
         $account = Account::create($validatedAccount);
 
         Doctor::create(['account_id' => $account->id]);

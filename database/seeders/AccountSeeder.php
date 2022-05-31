@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Account;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,8 +16,8 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        $account = Account::where('email','superadmin@mail.com')->first();
-        if(!$account){
+        $account = Account::where('email', 'superadmin@mail.com')->first();
+        if (!$account) {
             Account::create([
                 'name' => 'superadmin',
                 'address' => 'alamat admin',
@@ -25,11 +26,13 @@ class AccountSeeder extends Seeder
                 'email' => 'superadmin@mail.com',
                 'password' => Hash::make('superadmin'),
                 'confirm_password' => Hash::make('superadmin'),
+                'role' => 'Admin',
+                'uuid' => Str::uuid(),
             ]);
         }
 
-        $account = Account::where('email','steven@mail.com')->first();
-        if(!$account){
+        $account = Account::where('email', 'steven@mail.com')->first();
+        if (!$account) {
             Account::create([
                 'name' => 'steven',
                 'address' => 'alamat dokter',
@@ -38,11 +41,13 @@ class AccountSeeder extends Seeder
                 'email' => 'steven@mail.com',
                 'password' => Hash::make('12345678'),
                 'confirm_password' => Hash::make('12345678'),
+                'role' => 'Doctor',
+                'uuid' => Str::uuid(),
             ]);
         }
 
-        $account = Account::where('email','imani@mail.com')->first();
-        if(!$account){
+        $account = Account::where('email', 'imani@mail.com')->first();
+        if (!$account) {
             Account::create([
                 'name' => 'imani',
                 'address' => 'alamat pasien',
@@ -51,6 +56,8 @@ class AccountSeeder extends Seeder
                 'email' => 'imani@mail.com',
                 'password' => Hash::make('12345678'),
                 'confirm_password' => Hash::make('12345678'),
+                'role' => 'Patient',
+                'uuid' => Str::uuid(),
             ]);
         }
     }

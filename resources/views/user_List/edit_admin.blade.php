@@ -4,13 +4,13 @@
     <main class="mt-5 mb-3 pt-3">
         <div class="container-fluid">
             <div class="col-md-6 mx-auto">            
-                <h2 class="fw-bold text-center">Update Doctor Profile</h3>
+                <h2 class="fw-bold text-center">Update Admin Profile</h3>
                     @if (session('success'))
                         <div class="alert alert-success">
                         {{ session('success') }}
                         </div>
                     @endif
-                <form method="POST" action="/update-doctor/{{ $account->id }}" class="form-horizontal">
+                <form method="POST" action="/user-list/edit/admin/{{ $account->uuid }}" class="form-horizontal">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">
@@ -53,16 +53,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="specialist" class="form-label">Specialist</label>
-                        <input type="text" class="form-control" id="specialist" name="specialist" value="{{ old('specialist', $doctor->specialist) }}">
-                    </div>
-                    <div class="mb-3">
                         <label for="start_hour" class="form-label">Start hour</label>
-                        <input type="time" class="form-control" id="start_hour" name="start_hour" value= "{{ old('start_hour', $doctor->start_hour) }}">
+                        <input type="time" class="form-control" id="start_hour" name="start_hour" value= "{{ old('start_hour', $admin->start_hour) }}">
                     </div>
                     <div class="mb-3">
                         <label for="end_hour" class="form-label">End hour</label>
-                        <input type="time" class="form-control" id="end_hour" name="end_hour" value= "{{ old('end_hour', $doctor->end_hour) }}">
+                        <input type="time" class="form-control" id="end_hour" name="end_hour" value= "{{ old('end_hour', $admin->end_hour) }}">
                     </div>
                     <button type="submit" class="btn btn-dark">Update Profile</button>
                 </form>

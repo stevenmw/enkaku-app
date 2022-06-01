@@ -58,6 +58,7 @@ class UserListController extends Controller
     public function formEditDoctor($uuid)
     {
         $account = Account::where('uuid', $uuid)->first();
+        // $account = Account::where('uuid', auth()->user()->uuid)->first();
         return view('user_List.edit_doctor', [
             'account' => $account,
             'doctor' => $account->doctor
@@ -90,7 +91,7 @@ class UserListController extends Controller
 
         $account->save();
         $admin->save();
-        return redirect('/update-admin')->with('success', 'Update Profile Success!');;
+        return redirect('/user-list/admin/{uuid}')->with('success', 'Update Profile Success!');;
     }
 
     public function editDataDoctor(Request $request, $uuid)
@@ -111,7 +112,7 @@ class UserListController extends Controller
 
         $account->save();
         $doctor->save();
-        return redirect('/update-doctor')->with('success', 'Update Profile Success!');;
+        return redirect('/user-list/doctor/{uuid}')->with('success', 'Update Profile Success!');;
     }
 
     public function editDataPatient(Request $request, $uuid)

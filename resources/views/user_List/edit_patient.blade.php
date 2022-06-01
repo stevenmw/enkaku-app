@@ -5,10 +5,22 @@
         <div class="container-fluid">
             <div class="col-md-6 mx-auto">    
                 <h2 class="fw-bold text-center">Data Patient</h3>
-                <form class="form-horizontal">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
+                        </div>
+                    @endif
+                <form method="POST" action="/user-list/edit/patient/{{ $account->uuid }}" class="form-horizontal">
+                    @method('PUT')
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" value="{{ old('name', $account->name) }}" name="name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $account->name) }}">
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
@@ -21,7 +33,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
-                        <input type="text" class="form-control" id="gender" name="gender" value="{{ old('address', $account->gender) }}">
+                        {{-- <input type="text" class="form-control" id="gender" name="gender"> --}}
+                        <select name="gender" class="form-select" aria-label="Default select example">
+                            <option value="">--- Please input your gender ----</option>
+                            <option value="Laki-laki" @if(old('gender', $account->gender) == 'Laki-laki')  'selected' @endif>Laki-laki</option>
+                            <option value="Perempuan" @if(old('gender', $account->gender) == 'Perempuan')  'selected' @endif>Perempuan</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="contact" class="form-label">Contact Number</label>
@@ -43,6 +60,7 @@
                         <label for="condition" class="form-label">Disease and Condition</label>
                         <input type="text" class="form-control" id="condition" name="condition" value="{{ old('condition', $patient->disease_and_condition) }}">
                     </div>
+                    <button type="submit" class="btn btn-dark">Update Profile</button>
                 </form>
             </div>
         </div>

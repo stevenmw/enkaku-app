@@ -5,6 +5,11 @@
         <div class="container-fluid">
             <div class="col-md-6 mx-auto">    
                 <h2 class="fw-bold text-center">Data Admin</h3>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
+                        </div>
+                    @endif
                 <form class="form-horizontal">
                     <fieldset disabled>
                     <div class="mb-3">

@@ -82,7 +82,7 @@
             data-bs-toggle="collapse"
             href="#layouts"
           >
-            <span class="me-2"><i class="bi bi-file-earmark-bar-graph-fill"></i></span>
+            <span class="me-2"><i class="bi bi-bar-chart-line-fill"></i></span>
             <span>Charts</span>
             <span class="ms-auto">
               <span class="right-icon">
@@ -143,7 +143,7 @@
         </li>
         <li>
           <a href="#" class="nav-link px-3">
-            <span class="me-2"><i class="bi bi-question-circle"></i></span>
+            <span class="me-2"><i class="bi bi-shield-fill-exclamation"></i></span>
             <span>Privacy & Policy</span>
           </a>
         </li>

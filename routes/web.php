@@ -26,6 +26,26 @@ Route::get('/', function () {
     return view('landing_page.home');
 });
 
+Route::get('/about-us', function () {
+    return view('landing_page.about_us');
+});
+
+Route::get('/free-checkup', function () {
+    return view('landing_page.services.free_checkups');
+});
+
+Route::get('/physiotherapy', function () {
+    return view('landing_page.services.physiotherapy');
+});
+
+Route::get('/expert-doctor', function () {
+    return view('landing_page.services.expert-doctor');
+});
+
+Route::get('/rehabilitation-facility', function () {
+    return view('landing_page.services.rehabilitation');
+});
+
 // ------------user list routing---------------- //
 Route::get('/user-list', [UserListController::class, 'showUserList'])->middleware('auth');
 Route::get('/user-list/admin/{uuid}', [UserListController::class, 'getDataAdmin'])->middleware('auth');

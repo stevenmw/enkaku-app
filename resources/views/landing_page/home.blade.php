@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page Enkaku </title>
+@extends('landing_page.index')
 
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+@section('landing-page')
 
-    <!-- custom css file link  -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
-
-    <link rel="stylesheet" href="css/home.css">
-</head>
-<body>
-    
 <!-- header section starts  -->
 
 <header class="header">
@@ -63,7 +49,7 @@
     <div class="content">
         <h3>Telerehabilitation Prodigy in Medical History</h3>
         <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
-        @if (!auth()->user())            
+        @if (!auth()->user())
             <a href="/login" class="btn-login"> Sign In <span class="fas fa-chevron-right"></span> </a>
             <a href="/register-patient" class="btn-signup">Sign Up<span class="fas fa-chevron-right"></span> </a>
         @endif
@@ -112,48 +98,50 @@
     <h1 class="heading"> our <span>services</span> </h1>
 
     <div class="box-container">
-
+        
         <div class="box">
-            <i class="fas fa-notes-medical"></i>
-            <h3>free checkups</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <i class="fas fa-hospital-user"></i>
+            <h3>Pasca Stroke Physiotherapy</h3>
+            <p>Physiotherapy with expert doctors using a robotic exoskeleton and Functional Electrical Stimulation</p>
+            <a href="/physiotherapy" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
-            <i class="fas fa-ambulance"></i>
-            <h3>24/7 ambulance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <i class="fas fa-notes-medical"></i>
+            <h3>Free checkup</h3>
+            <h3></h3>
+            <p>FreeLife is 24/7, and so are we. Access affordable medical care 365 days a year, in-person or online!</p>
+            <a href="/free-checkup" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-user-md"></i>
-            <h3>expert doctors</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Expert doctors</h3>
+            <h3></h3>
+            <p>We have several doctors who are experts in their respective fields, one of whom is a neurologist</p>
+            <a href="/expert-doctor" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
-            <i class="fas fa-pills"></i>
-            <h3>medicines</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <i class="fas fa-briefcase-medical"></i>
+            <h3>Total Care</h3>
+            <p>treatment in the inpatient rehabilitation setting has been shown to provide a higher level of care and achieve better results versus other types of rehabilitation programs.</p>
+            <a href="/rehabilitation-facility" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
-        <div class="box">
+        {{-- <div class="box">
             <i class="fas fa-procedures"></i>
-            <h3>bed facility</h3>
+            <h3>Rehabilitation Facility</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-heartbeat"></i>
-            <h3>total care</h3>
+            <h3>Total care</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -175,9 +163,8 @@
 
         <div class="content">
             <h3>we take care of your healthy life</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
-            <a href="/about" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <p>Enkaku Rehabilitation application system has the main feature in the form of report results related to patient progress data. This will provide an injection of enthusiasm and motivation for patients with post-stroke and similar comorbid diseases to recover quickly by observing the progress of the rehabilitation process through the infrastructure of the telerehabilitation system. </p>
+            <a href="/about-us" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
     </div>
@@ -456,7 +443,5 @@
 <!-- footer section ends -->
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-</body>
-</html>
+    
+@endsection

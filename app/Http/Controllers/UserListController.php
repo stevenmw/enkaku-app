@@ -91,7 +91,7 @@ class UserListController extends Controller
 
         $account->save();
         $admin->save();
-        return redirect('/user-list/admin/{uuid}')->with('success', 'Update Profile Success!');;
+        return redirect("/user-list/admin/$account->uuid")->with('success', 'Update Profile Success!');;
     }
 
     public function editDataDoctor(Request $request, $uuid)
@@ -112,7 +112,7 @@ class UserListController extends Controller
 
         $account->save();
         $doctor->save();
-        return redirect('/user-list/doctor/{uuid}')->with('success', 'Update Profile Success!');;
+        return redirect("/user-list/doctor/$account->uuid")->with('success', 'Update Profile Success!');;
     }
 
     public function editDataPatient(Request $request, $uuid)
@@ -136,7 +136,7 @@ class UserListController extends Controller
 
         $account->save();
         $patient->save();
-        return redirect('/update-patient')->with('success', 'Update Profile Success!');;
+        return redirect("/user-list/patient/$account->uuid")->with('success', 'Update Profile Success!');;
     }
 
     public function deleteDataAdmin($uuid)

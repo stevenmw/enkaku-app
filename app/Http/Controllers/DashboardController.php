@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Patient;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -65,14 +66,17 @@ class DashboardController extends Controller
     public function velocity()
     {
         $patients=[];
-        if(auth()->user()->isDoctor()){
+        $user = auth()->user();
+        if($user->role == 'Doctor'){
             $patients = Patient::whereHas('doctors',function(Builder $query){
                 $query->where('doctor_id',auth()->user()->doctor->id);
             })->get();
         }
-        if(auth()->user()->isAdmin()){
+        if($user->role == 'Admin'){
             $patients = Patient::all();
         }
-        return view('user.velocity',["patients" => $patients]);
+        
+        // return $patients;
+        return view('user.velocity',["patients" => $patients,'user' => $user]);
     }
 }

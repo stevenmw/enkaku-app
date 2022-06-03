@@ -7,16 +7,19 @@ use App\Models\Doctor;
 use App\Models\Account;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserListController extends Controller
 {
     public function showUserList()
     {
-        $account = Account::paginate(10);
-        return view('user.user_list', [
-            'accounts' => $account
-        ]);
+        $account = Account::all();
+        // $account = DB::select('SELECT * FROM accounts');
+        return $account;
+        // return view('user.user_list', [
+        //     'accounts' => $account
+        // ]);
     }
 
     public function getDataAdmin(Account $account, $uuid)

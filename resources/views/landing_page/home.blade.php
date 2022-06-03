@@ -415,15 +415,15 @@
 
         <div class="box">
             <h3>our services</h3>
-            <a href="#"> <i class="fas fa-chevron-right"></i> neuorologis </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> physiotherapy </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
+            <a href="/physiotherapy"> <i class="fas fa-chevron-right"></i> Pasca Stroke Physiotherapy </a>
+            <a href="/free-checkup"> <i class="fas fa-chevron-right"></i> Free Checkup </a>
+            <a href="/expert-doctor"> <i class="fas fa-chevron-right"></i> Expert Doctors </a>
+            <a href="/rehabilitation-facility"> <i class="fas fa-chevron-right"></i> Total Care </a>
         </div>
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +62-031-5923644 </a>
+            <a href="https://api.whatsapp.com/send?text={{urlencode(url()->current()) }}"> <i class="fas fa-phone"></i> +62-031-5923644 </a>
             <a href="#"> <i class="fas fa-envelope"></i> enkaku@gmail.com </a>
             <a href="#"> <i class="fas fa-map-marker-alt"></i> Surabaya, Indonesia </a>
         </div>

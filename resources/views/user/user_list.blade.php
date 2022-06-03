@@ -3,10 +3,10 @@
 @section('page_content')
   <main class="mt-5 pt-3">
     {{-- <div class="container-fluid"> --}}
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-2 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center ms-4 pt-2 pb-2 mb-2 border-bottom">
             <h2 class="text-justify" class="font-weight-bold">User List</h2>
         </div>
-            <div class="table-responsive-sm col-lg-8">
+            <div class="table-responsive-sm col-lg-8 ms-4">
                     @if (session('success'))
                       <div class="alert alert-success">
                       {{ session('success') }}

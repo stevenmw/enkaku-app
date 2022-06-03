@@ -19,6 +19,7 @@ use App\Http\Controllers\UserListController;
 |
 */
 
+// -----------------landing page routing-----------------------
 Route::get('/', function () {
     // if (auth()->user()) {
     //     return redirect('dashboard');
@@ -45,6 +46,7 @@ Route::get('/expert-doctor', function () {
 Route::get('/rehabilitation-facility', function () {
     return view('landing_page.services.rehabilitation');
 });
+// -----------------end of landing page routing-----------------------
 
 // ------------user list routing---------------- //
 Route::get('/user-list', [UserListController::class, 'showUserList'])->middleware('auth');
@@ -78,6 +80,7 @@ Route::put('update-admin/{id}', [UpdateController::class, 'updateAdmin'])->middl
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/profile', [DashboardController::class, 'profile'])->middleware('auth');
 Route::get('/helpcenter', [DashboardController::class, 'helpcenter'])->middleware('auth');
+Route::get('/terms', [DashboardController::class, 'terms'])->middleware('auth');
 Route::get('/current', [DashboardController::class, 'current'])->middleware('auth');
 Route::get('/trajectory', [DashboardController::class, 'trajectory'])->middleware('auth');
 Route::get('/velocity', [DashboardController::class, 'velocity'])->middleware('auth');

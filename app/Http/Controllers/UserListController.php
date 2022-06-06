@@ -7,70 +7,85 @@ use App\Models\Doctor;
 use App\Models\Account;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserListController extends Controller
 {
     public function showUserList()
     {
+        $user = auth()->user();
         $account = Account::paginate(10);
         return view('user.user_list', [
-            'accounts' => $account
+            'accounts' => $account,
+            'user' => $user
         ]);
     }
 
     public function getDataAdmin(Account $account, $uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         return view('user_list.get_admin', [
             'account' => $account,
-            'admin' => $account->admin
+            'admin' => $account->admin,
+            'user' => $user
         ]);
     }
 
     public function getDataDoctor(Account $account, $uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         return view('user_list.get_doctor', [
             'account' => $account,
-            'doctor' => $account->doctor
+            'doctor' => $account->doctor,
+            'user' => $user
         ]);
     }
 
     public function getDataPatient(Account $account, $uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         return view('user_list.get_patient', [
             'account' => $account,
             'patient' => $account->patient,
+            'user' => $user
         ]);
     }
 
     public function formEditAdmin($uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         return view('user_List.edit_admin', [
             'account' => $account,
-            'admin' => $account->admin
+            'admin' => $account->admin,
+            'user' => $user
         ]);
     }
 
     public function formEditDoctor($uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         // $account = Account::where('uuid', auth()->user()->uuid)->first();
         return view('user_List.edit_doctor', [
             'account' => $account,
-            'doctor' => $account->doctor
+            'doctor' => $account->doctor,
+            'user' => $user
         ]);
     }
 
     public function formEditPatient($uuid)
     {
+        $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         return view('user_List.edit_patient', [
             'account' => $account,
-            'patient' => $account->patient
+            'patient' => $account->patient,
+            'user' => $user
         ]);
     }
 

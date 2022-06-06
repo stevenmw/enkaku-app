@@ -36,12 +36,12 @@
         </div> --}}
       </form>
       <ul class="navbar-nav">
-        @if (auth()->user()->isAdmin())
-          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{auth()->user()->name}} - Administrator</a>
-        @elseif (auth()->user()->isDoctor())
-          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{auth()->user()->name}} - Doctor</a>
-        @elseif (auth()->user()->isPatient())
-          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{auth()->user()->name}} - Patient</a>
+        @if ($user->role == 'Admin')
+          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{$user->name}} - Administrator</a>
+        @elseif ($user->role == 'Doctor')
+          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{$user->name}} - Doctor</a>
+        @elseif ($user->role == 'Patient')
+          <a class="navbar-brand me-auto ms-lg-0 ms-3">{{$user->name}} - Patient</a>
         @endif
         {{-- <a class="navbar-brand me-auto ms-lg-0 ms-3">{{auth()->user()->name}}</a> --}}
         <li class="nav-item dropdown">
@@ -55,11 +55,11 @@
             <i class="bi bi-person-fill"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            @if (auth()->user()->isPatient())
+            @if ($user->role == 'Patient')
               <li><a class="dropdown-item" href="/update-patient">My Profiles</a></li>               
-            @elseif (auth()->user()->isDoctor())
+            @elseif ($user->role == 'Doctor')
               <li><a class="dropdown-item" href="/update-doctor">My Profiles</a></li>
-            @elseif (auth()->user()->isAdmin())
+            @elseif ($user->role == 'Admin')
               <li><a class="dropdown-item" href="/update-admin">My Profiles</a></li>
             @endif
             <li><a class="dropdown-item" href="/">Settings</a></li>

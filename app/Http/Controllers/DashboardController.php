@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Patient;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,73 +13,80 @@ class DashboardController extends Controller
     public function index()
     {
         $patients = [];
-        if (auth()->user()->isDoctor()) {
+        $user = auth()->user();
+        if ($user->role == 'Doctor') {
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
         }
-        if (auth()->user()->isAdmin()) {
+        if ($user->role == 'Admin') {
             $patients = Patient::all();
         }
-        return view('user.index', ["patients" => $patients]);
+        return view('user.index', ["patients" => $patients, 'user' => $user]);
     }
 
     public function profile()
     {
-        return view('user.profile');
+        $user = auth()->user();
+        return view('user.profile', ['user' => $user]);
     }
 
     public function helpcenter()
     {
-        return view('user.helpcenter');
+        $user = auth()->user();
+        return view('user.helpcenter', ['user' => $user]);
     }
 
     public function terms()
     {
-        return view('user.terms');
+        $user = auth()->user();
+        return view('user.terms', ['user' => $user]);
     }
 
     public function current()
     {
         $patients = [];
-        if (auth()->user()->isDoctor()) {
+        $user = auth()->user();
+        if ($user->role == 'Doctor') {
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
         }
-        if (auth()->user()->isAdmin()) {
+        if ($user->role == 'Admin') {
             $patients = Patient::all();
         }
 
-        return view('user.current', ["patients" => $patients]);
+        return view('user.current', ["patients" => $patients, 'user' => $user]);
     }
 
     public function trajectory()
     {
         $patients = [];
-        if (auth()->user()->isDoctor()) {
+        $user = auth()->user();
+        if ($user->role == 'Doctor') {
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
         }
-        if (auth()->user()->isAdmin()) {
+        if ($user->role == 'Admin') {
             $patients = Patient::all();
         }
 
-        return view('user.trajectory', ["patients" => $patients]);
+        return view('user.trajectory', ["patients" => $patients, 'user' => $user]);
     }
 
     public function velocity()
     {
         $patients = [];
-        if (auth()->user()->isDoctor()) {
+        $user = auth()->user();
+        if ($user->role == 'Doctor') {
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
         }
-        if (auth()->user()->isAdmin()) {
+        if ($user->role == 'Admin') {
             $patients = Patient::all();
         }
-        return view('user.velocity', ["patients" => $patients]);
+        return view('user.velocity', ["patients" => $patients, 'user' => $user]);
     }
 }

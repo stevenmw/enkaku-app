@@ -26,7 +26,8 @@ class RegisterController extends Controller
 
     public function registerDoctor()
     {
-        if (auth()->user()->isAdmin()) {
+        $user = auth()->user();
+        if ($user->role == 'Admin') {
             return view('authorization.register', ['account' => 'DOCTOR']);
         }
         return back()->with('error', 'Unauthorized');
@@ -34,7 +35,8 @@ class RegisterController extends Controller
 
     public function registerAdmin()
     {
-        if (auth()->user()->isAdmin()) {
+        $user = auth()->user();
+        if ($user->role == 'Admin') {
             return view('authorization.register', ['account' => 'ADMIN']);
         }
         return back()->with('error', 'Unauthorized');

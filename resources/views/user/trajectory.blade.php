@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-12 mb-3">
                 {{-- Pasien Tidak Bisa Import File --}}
-                @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
+                @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                       Import File
                     </button>
@@ -88,7 +88,7 @@
                             <option value="TRAYEKTORI" selected>Trayektori</option>
                           </select>
                           <br>
-                          @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
+                          @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
                             @foreach ($patients as $patient)
@@ -99,8 +99,8 @@
                             Please choose a name.
                           </div>
                           @endif
-                          @if(auth()->user()->isPatient())
-                          <input type="hidden" name="patient_id" value="{{auth()->user()->patient->id}}">
+                          @if(($user->role=='Patient'))
+                          <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
       
@@ -131,7 +131,7 @@
                             <option value="TRAYEKTORI" selected>Trayektori</option>
                           </select>
                           <br>
-                          @if (auth()->user()->isDoctor() || auth()->user()->isAdmin())
+                          @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
                             @foreach ($patients as $patient)
@@ -142,8 +142,8 @@
                             Please choose a name.
                           </div>
                           @endif
-                          @if(auth()->user()->isPatient())
-                          <input type="hidden" name="patient_id" value="{{auth()->user()->patient->id}}">
+                          @if(($user->role=='Patient'))
+                          <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
                       </div>

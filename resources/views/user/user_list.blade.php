@@ -50,7 +50,9 @@
                               @endforeach
                           </tbody>
                       </table>
-                      {{ $accounts->links() }}
+                      <div class="d-flex justify-content-center">
+                        {{ $accounts->links() }}
+                      </div>
             </div>
   </main>
 @endsection

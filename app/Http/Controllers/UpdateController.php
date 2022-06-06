@@ -14,7 +14,8 @@ class UpdateController extends Controller
 {
     public function formUpdatePatient()
     {
-        if (!auth()->user()->isPatient()) {
+        $user = auth()->user();
+        if (!$user->role == 'Patient') {
             return redirect('/dashboard')->with('error', 'You have no access to this page');
         }
         $account = Account::where('id', auth()->user()->id)->first();
@@ -22,13 +23,15 @@ class UpdateController extends Controller
         // $patient = Patient::where('account_id', auth()->user()->id)->first();
         return view('edit_profile.patient', [
             'account' => $account,
-            'patient' => $account->patient
+            'patient' => $account->patient,
+            'user'    => $user
         ]);
     }
 
     public function formUpdateDoctor()
     {
-        if (!auth()->user()->isDoctor()) {
+        $user = auth()->user();
+        if (!$user->role == 'Doctor') {
             return redirect('/dashboard')->with('error', 'You have no access to this page');
         }
         $account = Account::where('id', auth()->user()->id)->first();
@@ -36,19 +39,22 @@ class UpdateController extends Controller
 
         return view('edit_profile.doctor', [
             'account' => $account,
-            'doctor' => $account->doctor
+            'doctor'  => $account->doctor,
+            'user'    => $user
         ]);
     }
 
     public function formUpdateAdmin()
     {
-        if (!auth()->user()->isAdmin()) {
+        $user = auth()->user();
+        if (!$user->role == 'Admin') {
             return redirect('/dashboard')->with('error', 'You have no access to this page');
         }
         $account = Account::where('id', auth()->user()->id)->first();
         return view('edit_profile.admin', [
             'account' => $account,
-            'admin' => $account->admin
+            'admin' => $account->admin,
+            'user'    => $user
         ]);
     }
 

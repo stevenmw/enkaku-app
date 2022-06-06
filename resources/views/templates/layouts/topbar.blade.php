@@ -62,7 +62,7 @@
             @elseif ($user->role == 'Admin')
               <li><a class="dropdown-item" href="/update-admin">My Profiles</a></li>
             @endif
-            <li><a class="dropdown-item" href="/">Settings</a></li>
+            {{-- <li><a class="dropdown-item" href="/">Settings</a></li> --}}
             <li>
               <form action="/logout" method="POST">
                 @csrf

@@ -2,20 +2,6 @@
 
 @section('page_content')
   <main class="mt-5 pt-3">
-    {{-- <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
-          <h2 class="text-justify" class="font-weight-bold">Help Center Enkaku</h2>
-          <div class="img-fluid" alt="Responsive image">
-            <img src="images/call-center-animate.svg" alt="home.image">
-            <div class="content">
-              <h3>Telerehabilitation Prodigy in Medical History</h3>
-              <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
     <div class="d-flex justify-content-center">
       <h2 class="font-weight-bold">Help and Center Enkaku</h2>
     </div>
@@ -23,8 +9,14 @@
       <div class="img-fluid" alt="Responsive image">
         <img src="images/call-center-animate.svg" alt="home.image">
         <div class="content">
-          <h3>Telerehabilitation Prodigy in Medical History</h3>
-          <p>We build a Telerehabilitation information system that offers one solution in providing rehabilitation services for medical industry</p>
+          <h3>Need More Information? Don't Hesitate to Contact Us!</h3>
+          <p>Don’t forget to request a free evaluation of your healthcare organization to see how we can help take your program to the next level</p>
+          <ol class="list-group list-group-numbered">
+            <li class="list-group-item">+62-031-5923644</li>
+            <li class="list-group-item">enkaku@gmail.com</li>
+            <li class="list-group-item">enkaku-app.groupdeku.tech</li>
+            <br>
+          </ol>
         </div>
       </div>      
     </div>

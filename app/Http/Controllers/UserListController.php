@@ -59,7 +59,7 @@ class UserListController extends Controller
     {
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
-        return view('user_List.edit_admin', [
+        return view('user_list.edit_admin', [
             'account' => $account,
             'admin' => $account->admin,
             'user' => $user
@@ -71,7 +71,7 @@ class UserListController extends Controller
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         // $account = Account::where('uuid', auth()->user()->uuid)->first();
-        return view('user_List.edit_doctor', [
+        return view('user_list.edit_doctor', [
             'account' => $account,
             'doctor' => $account->doctor,
             'user' => $user
@@ -82,7 +82,7 @@ class UserListController extends Controller
     {
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
-        return view('user_List.edit_patient', [
+        return view('user_list.edit_patient', [
             'account' => $account,
             'patient' => $account->patient,
             'user' => $user

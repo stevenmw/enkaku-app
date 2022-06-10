@@ -15,6 +15,7 @@
         </li>
 
         @if ( !($user->role == 'Patient') )
+        @if (($user->role == 'Admin'))
           <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
           <li>
             <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
@@ -28,7 +29,6 @@
             </a>
           </li>
           <li>
-            @if (($user->role == 'Admin'))    
               <a
                 class="nav-link px-3 sidebar-link"
                 data-bs-toggle="collapse"

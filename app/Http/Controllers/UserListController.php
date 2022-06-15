@@ -99,8 +99,8 @@ class UserListController extends Controller
         $account->date_birth = $request->dateofbirth;
         $account->gender = $request->gender;
         $account->email = $request->email;
-        $account->password = Hash::make($request->password);
-        $account->confirm_password = Hash::make($request->confirm_password);
+        // $account->password = Hash::make($request->password);
+        // $account->confirm_password = Hash::make($request->confirm_password);
         $admin->start_hour = $request->start_hour;
         $admin->end_hour = $request->end_hour;
 
@@ -119,8 +119,8 @@ class UserListController extends Controller
         $account->date_birth = $request->dateofbirth;
         $account->gender = $request->gender;
         $account->email = $request->email;
-        $account->password = Hash::make($request->password);
-        $account->confirm_password = Hash::make($request->confirm_password);
+        // $account->password = Hash::make($request->password);
+        // $account->confirm_password = Hash::make($request->confirm_password);
         $doctor->start_hour = $request->start_hour;
         $doctor->end_hour = $request->end_hour;
         $doctor->specialist = $request->specialist;
@@ -142,8 +142,8 @@ class UserListController extends Controller
         $account->date_birth = $request->dateofbirth;
         $account->gender = $request->gender;
         $account->email = $request->email;
-        $account->password = Hash::make($request->password);
-        $account->confirm_password = Hash::make($request->confirm_password);
+        // $account->password = Hash::make($request->password);
+        // $account->confirm_password = Hash::make($request->confirm_password);
         $patient->contact_number = $request->contact_number;
         $patient->weight = $request->weight;
         $patient->height = $request->height;

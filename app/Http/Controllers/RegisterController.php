@@ -63,7 +63,7 @@ class RegisterController extends Controller
         //add data into patient_doctors table
         $patient->doctors()->attach($request->doctor);
 
-        return redirect('/login')->with('success', 'Doctor registration is success! Please login');
+        return redirect('/login')->with('success', 'Patient registration is success! Please login');
     }
 
     public function storeAdmin(Request $request)

@@ -25,6 +25,12 @@ class DashboardController extends Controller
         return view('user.index', ["patients" => $patients, 'user' => $user]);
     }
 
+    public function guide()
+    {
+        $user = auth()->user();
+        return view('user.guide', ['user' => $user]);
+    }
+
     public function profile()
     {
         $user = auth()->user();

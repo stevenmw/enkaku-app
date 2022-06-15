@@ -12,6 +12,10 @@
             <span class="me-2"><i class="bi bi-speedometer2"></i></span>
             <span>Dashboard</span>
           </a>
+          <a href="/guide" class="nav-link px-3 sidebar-link">
+            <span class="me-2"><i class="bi bi-book"></i></span>
+            <span>Guide</span>
+          </a>
         </li>
 
         @if ( !($user->role == 'Patient') )

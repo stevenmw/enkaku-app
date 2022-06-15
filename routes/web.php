@@ -78,6 +78,7 @@ Route::put('update-admin/{id}', [UpdateController::class, 'updateAdmin'])->middl
 // ---------end of update profile routing---------------- //
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/guide', [DashboardController::class, 'guide'])->middleware('auth');
 Route::get('/profile', [DashboardController::class, 'profile'])->middleware('auth');
 Route::get('/helpcenter', [DashboardController::class, 'helpcenter'])->middleware('auth');
 Route::get('/terms', [DashboardController::class, 'terms'])->middleware('auth');

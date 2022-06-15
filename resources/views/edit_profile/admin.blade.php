@@ -27,14 +27,14 @@
                         <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $account->email) }}" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">Confirm Password</label>
                         <input type="confirm_password" class="form-control" id="confirm_password" name="confirm_password">
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $account->address) }}">

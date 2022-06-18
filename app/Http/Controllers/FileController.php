@@ -29,7 +29,7 @@ class FileController extends Controller
                 DB::beginTransaction();
                 $onlyName = explode(".", $file->getClientOriginalName())[0];
                 // nama file saat disimpan di server
-                $fileName = $request->type . '-' . auth()->user()->id . '-' . Carbon::now()->format('ymd') . '.' . $file->getClientOriginalExtension();
+                $fileName = $request->type . '-' . $request->patient_id . '-' . Carbon::now()->format('ymd') . '.' . $file->getClientOriginalExtension();
                 // namatraining-id-tanggal
 
                 switch ($request->type) {
@@ -58,9 +58,15 @@ class FileController extends Controller
                 ]);
                 $file->storeAs($filePath, $fileName);
                 DB::commit();
-                return back()->with('status', 'Import File Success');
+                // return back()->with('status', 'Import File Success');
+                return response()->json([
+                    'message' => 'success import',
+                ],200);
             }
-            return back()->with('error', 'Import File Not Success');
+            // return back()->with('error', 'Import File Not Success');
+            return response()->json([
+                'message' => 'failed'
+            ],400);
         } catch (\Throwable $th) {
             DB::rollBack();
             return $th;

@@ -179,8 +179,9 @@ class FileController extends Controller
     public function downloadFile(Request $request)
     {
         $path = null;
-
-        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)
+        ->where('id', $request->file_name)->first();
+        // $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
 
         if (!$temp) {
             return back()->with('error', 'File Training Not Found');

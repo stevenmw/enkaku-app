@@ -107,3 +107,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/logout', [LoginController::class, 'logout']);
 // --------------end of login and logout routing------------------ //
+
+// Open API Comunnication //
+Route::get('/user-list/patient/api', [UserListController::class, 'getDataPatientApi']);
+Route::post('/import-file/api', [FileController::class, 'importApi']);

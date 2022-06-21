@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8">
-          <h2 class="text-justify" class="font-weight-bold">Velocity</h2>
+          <h2 class="text-justify" class="font-weight-bold">Angular Velocity</h2>
 
           @include('templates.layouts.notif')
 
@@ -39,7 +39,7 @@
                                 <form action="/import-file" method="POST" enctype="multipart/form-data" class="needs-validation">
                                   @csrf
                                   <select class="form-select" aria-label="pasien Select" name="type" required>
-                                    <option value="KECEPATAN" selected>Kecepatan</option>
+                                    <option value="KECEPATAN" selected>Kecepatan (rpm)</option>
                                   </select>
                                   <br>
                                   <select class="form-select" aria-label="pasien Select" name="patient_id" required>
@@ -47,7 +47,7 @@
                                     @foreach ($patients as $patient)
                                     <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
                                     @endforeach
-                                  </select>        
+                                  </select>      
                                 
                                   <div class="invalid-feedback">
                                     Please choose a name.
@@ -89,11 +89,18 @@
                             <option value="KECEPATAN" selected>Kecepatan</option>
                           </select>
                           <br>
+                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
+                          </select>
+                          <br>
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
                             @foreach ($patients as $patient)
-                            <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
+                              <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
                             @endforeach
                           </select>
                           <div class="invalid-feedback">
@@ -130,6 +137,13 @@
                           @csrf
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="KECEPATAN" selected>Kecepatan</option>
+                          </select>
+                          <br>
+                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
                           </select>
                           <br>
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))

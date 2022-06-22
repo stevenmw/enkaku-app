@@ -88,6 +88,13 @@
                             <option value="ARUS" selected>Training Arus</option>
                           </select>
                           <br>
+                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
+                          </select>
+                          <br>
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
                           <select class="form-select" aria-label="pasien Select" name="patient_id" required>
                             <option value="" selected>---Pasien---</option>
@@ -129,6 +136,13 @@
                           @csrf
                           <select class="form-select" aria-label="pasien Select" name="type" required>
                             <option value="ARUS" selected>Arus</option>
+                          </select>
+                          <br>
+                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
                           </select>
                           <br>
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))

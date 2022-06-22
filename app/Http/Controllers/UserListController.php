@@ -44,7 +44,7 @@ class UserListController extends Controller
         ]);
     }
 
-    public function getDataPatient(Account $account, $uuid)
+    public function getDataPatient(Account $account)
     {
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
@@ -52,6 +52,14 @@ class UserListController extends Controller
             'account' => $account,
             'patient' => $account->patient,
             'user' => $user
+        ]);
+    }
+
+    public function getDataPatientApi(Account $account)
+    {
+        $data = Patient::with('account')->get();
+        return response()->json([
+            'data' => $data,
         ]);
     }
 

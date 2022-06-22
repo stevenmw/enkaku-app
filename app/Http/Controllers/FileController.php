@@ -67,6 +67,63 @@ class FileController extends Controller
         }
     }
 
+    public function importApi(Request $request)
+    {
+        $request->validate([
+            'patient_id' => 'required|integer',
+            'file' => 'required',
+            'type' => ['required', Rule::in([TrainingPath::arus, TrainingPath::kecepatan, TrainingPath::trayektori])],
+        ]);
+        try {
+            if ($request->file('file')) {
+                $file = $request->file('file');
+                DB::beginTransaction();
+                $onlyName = explode(".", $file->getClientOriginalName())[0];
+                // nama file saat disimpan di server
+                $fileName = $request->type . '-' . $request->patient_id . '-' . Carbon::now()->format('ymd') . '.' . $file->getClientOriginalExtension();
+                // namatraining-id-tanggal
+
+                switch ($request->type) {
+                    case TrainingPath::trayektori:
+                        $filePath = './File/Trayektori';
+                        break;
+
+                    case TrainingPath::arus:
+                        $filePath = './File/Arus';
+                        break;
+
+                    case TrainingPath::kecepatan:
+                        $filePath = './File/Kecepatan';
+                        break;
+
+                    default:
+                        $filePath = './File';
+                        break;
+                }
+                $trainPath = TrainingPath::create([
+                    'patient_id' => $request->patient_id,
+                    'file_name' => $fileName,
+                    'path_name' => $filePath . '/' . $fileName,
+                    'path_size' => $file->getSize(),
+                    'type' => $request->type,
+                ]);
+                $file->storeAs($filePath, $fileName);
+                DB::commit();
+                // return back()->with('status', 'Import File Success');
+                return response()->json([
+                    'message' => 'success import',
+                ], 200);
+            }
+            // return back()->with('error', 'Import File Not Success');
+            return response()->json([
+                'message' => 'failed'
+            ], 400);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $th;
+        }
+    }
+
     public function processFile(Request $request)
     {
         $data = null;
@@ -96,7 +153,8 @@ class FileController extends Controller
             ], 400);
         }
 
-        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)
+            ->where('id', $request->file_name)->first();
 
         if (!$temp) {
             return response()->json([
@@ -121,8 +179,9 @@ class FileController extends Controller
     public function downloadFile(Request $request)
     {
         $path = null;
-
-        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
+        $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)
+        ->where('id', $request->file_name)->first();
+        // $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
 
         if (!$temp) {
             return back()->with('error', 'File Training Not Found');

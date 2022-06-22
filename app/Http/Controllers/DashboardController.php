@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Patient;
+use App\Models\TrainingPath;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -57,12 +58,24 @@ class DashboardController extends Controller
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'ARUS')->get();
         }
         if ($user->role == 'Admin') {
             $patients = Patient::all();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'ARUS')->get();
         }
-
-        return view('user.current', ["patients" => $patients, 'user' => $user]);
+        if ($user->role == 'Patient') {
+            $fileName = TrainingPath::where('patient_id', $user->patient->id)->where('type', 'ARUS')->get();
+        }
+        return view('user.current', ["patients" => $patients, 'user' => $user, 'fileName' => $fileName]);
     }
 
     public function trajectory()
@@ -73,12 +86,24 @@ class DashboardController extends Controller
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'TRAYEKTORI')->get();
         }
         if ($user->role == 'Admin') {
             $patients = Patient::all();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'TRAYEKTORI')->get();
         }
-
-        return view('user.trajectory', ["patients" => $patients, 'user' => $user]);
+        if ($user->role == 'Patient') {
+            $fileName = TrainingPath::where('patient_id', $user->patient->id)->where('type', 'TRAYEKTORI')->get();
+        }
+        return view('user.trajectory', ["patients" => $patients, 'user' => $user, 'fileName' => $fileName]);
     }
 
     public function velocity()
@@ -89,10 +114,23 @@ class DashboardController extends Controller
             $patients = Patient::whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'KECEPATAN')->get();
         }
         if ($user->role == 'Admin') {
             $patients = Patient::all();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'KECEPATAN')->get();
         }
-        return view('user.velocity', ["patients" => $patients, 'user' => $user]);
+        if ($user->role == 'Patient') {
+            $fileName = TrainingPath::where('patient_id', $user->patient->id)->where('type', 'KECEPATAN')->get();
+        }
+        return view('user.velocity', ["patients" => $patients, 'user' => $user, 'fileName' => $fileName]);
     }
 }

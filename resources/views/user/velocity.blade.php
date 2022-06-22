@@ -100,7 +100,6 @@
                           <div class="invalid-feedback">
                             Please choose a name.
                           </div>
-                          @endif
                           <br>
                           <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
                             <option value="" selected>---File Name---</option>
@@ -108,9 +107,16 @@
                               <option value="{{ $file->id }}">{{ $file->file_name }}</option>
                             @endforeach --}}
                           </select>
-                          
-
+                          @endif
+                         
                           @if(($user->role=='Patient'))
+                          <br>
+                          <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
+                          </select>
                           <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
@@ -153,7 +159,6 @@
                           <div class="invalid-feedback">
                             Please choose a name.
                           </div>
-                          @endif
                           <br>
                           <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-export" required>
                             <option value="" selected>---File Name---</option>
@@ -161,9 +166,15 @@
                               <option value="{{ $file->id }}">{{ $file->file_name }}</option>
                             @endforeach --}}
                           </select>
+                          @endif
                           
-
                           @if(($user->role=='Patient'))
+                          <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-export" required>
+                            <option value="" selected>---File Name---</option>
+                            @foreach ($fileName as $file)
+                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                            @endforeach
+                          </select>
                           <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
@@ -197,7 +208,7 @@
       </div>
     </div>
     <p hidden id="data-patient">
-      {{$patients}}
+      {{($patients) ? $patients : null;}}
     </p>
   </main>
 @endsection
@@ -207,39 +218,39 @@
     <script>
       const patientsJsonStr = document.getElementById("data-patient").innerHTML;
       const patientsObj = JSON.parse(patientsJsonStr);
-      console.log(patientsObj);
+      // console.log(patientsObj);
 
       // function select file dipanggil ketika user memilih pasien
       function selectFile(obj,fileElementId){
-        const patientId = obj.value;
-        // Get Data Patien dari array patientsObj sesuai dengan yang dipilih user
-        const patient = patientsObj.find((patient)=>{
-          return patient.id == patientId;
-        });
+          const patientId = obj.value;
+          // Get Data Patien dari array patientsObj sesuai dengan yang dipilih user
+          const patient = patientsObj.find((patient)=>{
+            return patient.id == patientId;
+          });
 
-        const fileNameSelect = document.getElementById(fileElementId);
-        // Hapus semua options di file name select
-        // Sehingga file name tidak bertumpuk dengan file pasien lain
-        fileNameSelect.innerHTML = null;
+          const fileNameSelect = document.getElementById(fileElementId);
+          // Hapus semua options di file name select
+          // Sehingga file name tidak bertumpuk dengan file pasien lain
+          fileNameSelect.innerHTML = null;
 
-        // Opsional, tambah option "---File Name---"
-        const option = document.createElement("option");
-          option.innerText = `---File Name---`;
-          option.setAttribute('value',"");
-          // Append to select:
-          fileNameSelect.appendChild(option);
-        
-          // Update file name select dengan value file setiap pasien
-        patient.training_paths.forEach(value => {
-          // Create element:
-         const option = document.createElement("option");
-          option.innerText = `${value.file_name}`;
-          option.setAttribute('value',value.id);
+          // Opsional, tambah option "---File Name---"
+          const option = document.createElement("option");
+            option.innerText = `---File Name---`;
+            option.setAttribute('value',"");
+            // Append to select:
+            fileNameSelect.appendChild(option);
+          
+            // Update file name select dengan value file setiap pasien
+          patient.training_paths.forEach(value => {
+            // Create element:
+          const option = document.createElement("option");
+            option.innerText = `${value.file_name}`;
+            option.setAttribute('value',value.id);
 
-          // Append to select:
-          fileNameSelect.appendChild(option);  
-        });
-         
-      }
+            // Append to select:
+            fileNameSelect.appendChild(option);  
+          });
+        }
+      
     </script>
 @endsection

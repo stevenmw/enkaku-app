@@ -187,15 +187,15 @@ class FileController extends Controller
             return back()->with('error', 'File Training Not Found');
         }
 
-        if ($request->type == TrainingPath::kecepatan) {
-            $path = $this->processKecepatanFile($temp->path_name);
-        }
-        if ($request->type == TrainingPath::arus) {
-            $path = $this->processArusFile($temp->path_name);
-        }
-        if ($request->type == TrainingPath::trayektori) {
-            $path = $this->processTrayektoriFile($temp->path_name);
-        }
+        // if ($request->type == TrainingPath::kecepatan) {
+        //     $path = $this->processKecepatanFile($temp->path_name);
+        // }
+        // if ($request->type == TrainingPath::arus) {
+        //     $path = $this->processArusFile($temp->path_name);
+        // }
+        // if ($request->type == TrainingPath::trayektori) {
+        //     $path = $this->processTrayektoriFile($temp->path_name);
+        // }
 
         $file = Storage::download($temp->path_name, $temp->file_name);
         return $file;

@@ -25,4 +25,8 @@ class Patient extends Model
     public function doctors(){
         return $this->belongsToMany(Doctor::class,'patient_doctors','patient_id','doctor_id');
     }
+
+    public function trainingPaths(){
+        return $this->hasMany(TrainingPath::class,'patient_id','id');
+    }
 }

@@ -111,7 +111,9 @@ class DashboardController extends Controller
         $patients = [];
         $user = auth()->user();
         if ($user->role == 'Doctor') {
-            $patients = Patient::with('trainingPaths')->whereHas('doctors', function (Builder $query) {
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "KECEPATAN");
+            }])->whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
             $patient_id = [];
@@ -121,7 +123,9 @@ class DashboardController extends Controller
             $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'KECEPATAN')->get();
         }
         if ($user->role == 'Admin') {
-            $patients = Patient::with('trainingPaths')->get();
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "KECEPATAN");
+            }])->get();
             $patient_id = [];
             foreach ($patients as $patient) {
                 array_push($patient_id, $patient->id);

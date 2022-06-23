@@ -55,7 +55,9 @@ class DashboardController extends Controller
         $patients = [];
         $user = auth()->user();
         if ($user->role == 'Doctor') {
-            $patients = Patient::whereHas('doctors', function (Builder $query) {
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "ARUS");
+            }])->whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
             $patient_id = [];
@@ -65,7 +67,9 @@ class DashboardController extends Controller
             $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'ARUS')->get();
         }
         if ($user->role == 'Admin') {
-            $patients = Patient::all();
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "ARUS");
+            }])->get();
             $patient_id = [];
             foreach ($patients as $patient) {
                 array_push($patient_id, $patient->id);
@@ -83,7 +87,9 @@ class DashboardController extends Controller
         $patients = [];
         $user = auth()->user();
         if ($user->role == 'Doctor') {
-            $patients = Patient::whereHas('doctors', function (Builder $query) {
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "TRAYEKTORI");
+            }])->whereHas('doctors', function (Builder $query) {
                 $query->where('doctor_id', auth()->user()->doctor->id);
             })->get();
             $patient_id = [];
@@ -93,7 +99,9 @@ class DashboardController extends Controller
             $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'TRAYEKTORI')->get();
         }
         if ($user->role == 'Admin') {
-            $patients = Patient::all();
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "TRAYEKTORI");
+            }])->get();
             $patient_id = [];
             foreach ($patients as $patient) {
                 array_push($patient_id, $patient->id);

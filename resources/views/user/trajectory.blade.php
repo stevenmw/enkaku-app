@@ -88,15 +88,9 @@
                             <option value="TRAYEKTORI" selected>Trayektori</option>
                           </select>
                           <br>
-                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
-                            <option value="" selected>---File Name---</option>
-                            @foreach ($fileName as $file)
-                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
-                            @endforeach
-                          </select>
-                          <br>
+
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
-                          <select class="form-select" aria-label="pasien Select" name="patient_id" required>
+                          <select class="form-select" aria-label="pasien Select" name="patient_id" required onchange="selectFile(this,'file-name-show')">
                             <option value="" selected>---Pasien---</option>
                             @foreach ($patients as $patient)
                             <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
@@ -105,9 +99,24 @@
                           <div class="invalid-feedback">
                             Please choose a name.
                           </div>
+                          <br>
+                            <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
+                              <option value="" selected>---File Name---</option>
+                              {{-- @foreach ($fileName as $file)
+                                <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                              @endforeach --}}
+                            </select>
                           @endif
+                          
                           @if(($user->role=='Patient'))
-                          <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
+                          <br>
+                            <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
+                              <option value="" selected>---File Name---</option>
+                              @foreach ($fileName as $file)
+                                <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                              @endforeach
+                            </select>
+                            <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
       
@@ -138,26 +147,35 @@
                             <option value="TRAYEKTORI" selected>Trayektori</option>
                           </select>
                           <br>
-                          <select class="form-select" aria-label="pasien Select" name="file_name" required>
-                            <option value="" selected>---File Name---</option>
-                            @foreach ($fileName as $file)
-                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
-                            @endforeach
-                          </select>
-                          <br>
+
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
-                          <select class="form-select" aria-label="pasien Select" name="patient_id" required>
-                            <option value="" selected>---Pasien---</option>
-                            @foreach ($patients as $patient)
-                            <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
-                            @endforeach
-                          </select>
-                          <div class="invalid-feedback">
-                            Please choose a name.
-                          </div>
+                            <select class="form-select" aria-label="pasien Select" name="patient_id" required onchange="selectFile(this,'file-name-export')">
+                              <option value="" selected>---Pasien---</option>
+                              @foreach ($patients as $patient)
+                              <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
+                              @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                              Please choose a name.
+                            </div>
+                            <br>
+                            <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-export" required>
+                              <option value="" selected>---File Name---</option>
+                              {{-- @foreach ($fileName as $file)
+                                <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                              @endforeach --}}
+                            </select>
                           @endif
+                       
+
                           @if(($user->role=='Patient'))
-                          <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
+                            <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-export" required>
+                              <option value="" selected>---File Name---</option>
+                              @foreach ($fileName as $file)
+                                <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                              @endforeach
+                            </select>
+                            <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                           @endif
                           <br>
                       </div>
@@ -190,9 +208,50 @@
         </div>
       </div>
     </div>
+    <p hidden id="data-patient">
+      {{($patients) ? $patients : null;}}
+    </p>
   </main>
 @endsection
 
 @section('script_chart')
     <script src="./js/user/trajectory-script.js"></script>
+    <script>
+      const patientsJsonStr = document.getElementById("data-patient").innerHTML;
+      const patientsObj = JSON.parse(patientsJsonStr);
+      // console.log(patientsObj);
+
+      // function select file dipanggil ketika user memilih pasien
+      function selectFile(obj,fileElementId){
+          const patientId = obj.value;
+          // Get Data Patien dari array patientsObj sesuai dengan yang dipilih user
+          const patient = patientsObj.find((patient)=>{
+            return patient.id == patientId;
+          });
+
+          const fileNameSelect = document.getElementById(fileElementId);
+          // Hapus semua options di file name select
+          // Sehingga file name tidak bertumpuk dengan file pasien lain
+          fileNameSelect.innerHTML = null;
+
+          // Opsional, tambah option "---File Name---"
+          const option = document.createElement("option");
+            option.innerText = `---File Name---`;
+            option.setAttribute('value',"");
+            // Append to select:
+            fileNameSelect.appendChild(option);
+          
+            // Update file name select dengan value file setiap pasien
+          patient.training_paths.forEach(value => {
+            // Create element:
+          const option = document.createElement("option");
+            option.innerText = `${value.file_name}`;
+            option.setAttribute('value',value.id);
+
+            // Append to select:
+            fileNameSelect.appendChild(option);  
+          });
+        }
+      
+    </script>
 @endsection

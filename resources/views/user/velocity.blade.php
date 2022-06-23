@@ -91,22 +91,23 @@
                           <br>
                          
                           @if (($user->role == 'Doctor') || ($user->role == 'Admin'))
-                          <select class="form-select" aria-label="pasien Select" name="patient_id" required onchange="selectFile(this,'file-name-show')">
-                            <option value="" selected>---Pasien---</option>
-                            @foreach ($patients as $patient)
-                              <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
-                            @endforeach
-                          </select>
-                          <div class="invalid-feedback">
-                            Please choose a name.
-                          </div>
-                          <br>
-                          <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
-                            <option value="" selected>---File Name---</option>
-                            {{-- @foreach ($fileName as $file)
-                              <option value="{{ $file->id }}">{{ $file->file_name }}</option>
-                            @endforeach --}}
-                          </select>
+                            <select class="form-select" aria-label="pasien Select" name="patient_id" required onchange="selectFile(this,'file-name-show')">
+                              <option value="" selected>---Pasien---</option>
+                              @foreach ($patients as $patient)
+                                <option value="{{$patient->id}}" >{{$patient->account->name}}</option>
+                              @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                              Please choose a name.
+                            </div>
+                            <br>
+                            
+                            <select class="form-select" aria-label="pasien Select" name="file_name" id="file-name-show" required>
+                              <option value="" selected>---File Name---</option>
+                              {{-- @foreach ($fileName as $file)
+                                <option value="{{ $file->id }}">{{ $file->file_name }}</option>
+                              @endforeach --}}
+                            </select>
                           @endif
                          
                           @if(($user->role=='Patient'))

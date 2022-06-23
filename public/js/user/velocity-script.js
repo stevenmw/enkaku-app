@@ -4,8 +4,22 @@ const velocityChart = document.querySelector("#velocity-chart").getContext('2d')
 
 const velocityGraph = new Chart(velocityChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Angular velocity (rpm)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time (ms)'
+                }
+            }
+        }
     }
 })
 

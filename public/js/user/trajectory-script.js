@@ -5,8 +5,22 @@ const trayektoriChart = document.querySelector("#trayektori-chart").getContext('
 // create a new instance
 const trayektoriGraph = new Chart(trayektoriChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Angle (Degree)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time (s)'
+                }
+            }
+        }
     }
 })
 

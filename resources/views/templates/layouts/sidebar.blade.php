@@ -101,7 +101,7 @@
                   <span class="me-2">
                     <i class="bi bi-speedometer2"></i>
                   </span>
-                  <span>Velocity</span>
+                  <span>Angular Velocity</span>
                 </a>
               </li>
             </ul>

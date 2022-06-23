@@ -7,29 +7,85 @@ const currentExtenMoveChart = document.querySelector("#current-exten-move-chart"
 
 const currentFlexNoMoveGraph = new Chart(currentFlexNoMoveChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Current (Ampere)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Timestamp'
+                }
+            }
+        }
     }
 })
 
 const currentExtenNoMoveGraph = new Chart(currentExtenNoMoveChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Current (Ampere)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Timestamp'
+                }
+            }
+        }
     }
 })
 
 const currentFlexMoveGraph = new Chart(currentFlexMoveChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Current (Ampere)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Timestamp'
+                }
+            }
+        }
     }
 })
 
 const currentExtenMoveGraph = new Chart(currentExtenMoveChart, {
     type: 'line',
-    option: {
-        responsive: true
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Current (Ampere)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Timestamp'
+                }
+            }
+        }
     }
 })
 

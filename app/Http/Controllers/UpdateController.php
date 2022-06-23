@@ -18,6 +18,7 @@ class UpdateController extends Controller
         if (!$user->role == 'Patient') {
             return redirect('/dashboard')->with('error', 'You have no access to this page');
         }
+
         $account = Account::where('id', auth()->user()->id)->first();
         // $account = Account::all();
         // $patient = Patient::where('account_id', auth()->user()->id)->first();

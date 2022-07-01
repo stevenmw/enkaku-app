@@ -41,7 +41,7 @@
                                         <a href="/user-list/delete/doctor/{{ $account->uuid }}" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                       @endif
                                       @if ($account->role == 'Patient')
-                                        <a href="/user-list/patient/{{ $account->uuid }}" class="badge bg-info"><span data-feather="eye"></span></a>
+                                        <a href="/user-list/_patient/{{ $account->uuid }}" class="badge bg-info"><span data-feather="eye"></span></a>
                                         <a href="/user-list/edit/patient/{{ $account->uuid }}" class="badge bg-warning"><span data-feather="edit"></span></a>
                                         <a href="/user-list/delete/patient/{{ $account->uuid }}" class="badge bg-danger"><span data-feather="x-circle"></span></a>
                                       @endif

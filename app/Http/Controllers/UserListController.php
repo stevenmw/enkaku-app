@@ -49,6 +49,18 @@ class UserListController extends Controller
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
         Patient::where('account_id', $account->id)->first();
+        // return view('user_list.get_patient', [
+        //     'account' => $account,
+        //     'patient' => $account->patient,
+        //     'user' => $user
+        // ]);
+    }
+
+    public function getDataPatient2(Account $account, $uuid)
+    {
+        $user = auth()->user();
+        $account = Account::where('uuid', $uuid)->first();
+        Patient::where('account_id', $account->id)->first();
         return view('user_list.get_patient', [
             'account' => $account,
             'patient' => $account->patient,
@@ -160,7 +172,7 @@ class UserListController extends Controller
 
         $account->save();
         $patient->save();
-        return redirect("/user-list/patient/$account->uuid")->with('success', 'Update Profile Success!');;
+        return redirect("/user-list/_patient/$account->uuid")->with('success', 'Update Profile Success!');;
     }
 
     public function deleteDataAdmin($uuid)

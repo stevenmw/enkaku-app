@@ -52,8 +52,8 @@ Route::get('/rehabilitation-facility', function () {
 Route::get('/user-list', [UserListController::class, 'showUserList'])->middleware('auth');
 Route::get('/user-list/admin/{uuid}', [UserListController::class, 'getDataAdmin'])->middleware('auth');
 Route::get('/user-list/doctor/{uuid}', [UserListController::class, 'getDataDoctor'])->middleware('auth');
-// Route::get('/user-list/patient/{uuid}', [UserListController::class, 'getDataPatient'])->middleware('auth');
-Route::get('/user-list/patient', [UserListController::class, 'getDataPatient']);
+Route::get('/user-list/patient/{uuid}', [UserListController::class, 'getDataPatient'])->middleware('auth');
+// Route::get('/user-list/patient', [UserListController::class, 'getDataPatient']);
 
 Route::get('/user-list/edit/admin/{uuid}', [UserListController::class, 'formEditAdmin'])->middleware('auth');
 Route::get('/user-list/edit/doctor/{uuid}', [UserListController::class, 'formEditDoctor'])->middleware('auth');

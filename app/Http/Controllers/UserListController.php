@@ -44,10 +44,11 @@ class UserListController extends Controller
         ]);
     }
 
-    public function getDataPatient(Account $account)
+    public function getDataPatient(Account $account, $uuid)
     {
         $user = auth()->user();
         $account = Account::where('uuid', $uuid)->first();
+        Patient::where('account_id', $account->id)->first();
         return view('user_list.get_patient', [
             'account' => $account,
             'patient' => $account->patient,

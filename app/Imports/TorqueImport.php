@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Torque;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class TorqueImport implements ToModel
+class TorqueImport implements ToModel,WithCalculatedFormulas
 {
     /**
      * @param array $row

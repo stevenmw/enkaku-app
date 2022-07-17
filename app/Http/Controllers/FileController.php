@@ -182,7 +182,7 @@ class FileController extends Controller
             $data = $this->processTrayektoriFile($temp->path_name);
         }
         if ($request->type == TrainingPath::torque) {
-            $data = $this->processTrayektoriFile($temp->path_name);
+            $data = $this->processTorqueFile($temp->path_name);
         }
 
         return response()->json($data);

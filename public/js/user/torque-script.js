@@ -103,7 +103,7 @@ function processTorque(data={}){
     yAxis = [
         {
             label: 'Flexion',
-            data: data.torqueShoulderFlexion,
+            data: data.maximumJointTorque_Shoulder_Flex,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
@@ -111,21 +111,21 @@ function processTorque(data={}){
         },
         {
             label: 'Extension',
-            data: data.torqueShoulderExtension,
+            data: data.maximumJointTorque_Shoulde_Exten,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
             pointRadius: 0
         }
     ];
-    xAxis = data.jointangleShoulderFlexExten;
+    xAxis = data.jointAngle_Shoulder_Flex_Exten;
     drawChart(shoulderFlexionExtensionGraph,xAxis,yAxis);
 
      // Shoulder Adduction Abduction
      yAxis = [
         {
             label: 'Adduction',
-            data: data.torqueShoulderAdduction,
+            data: data.maximumJointTorque_Shoulder_Adduc,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
@@ -133,21 +133,21 @@ function processTorque(data={}){
         },
         {
             label: 'Abduction',
-            data: data.torqueShoulderAbduction,
+            data: data.maximumJointTorque_Shoulder_Abduc,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
             pointRadius: 0
         }
     ];
-    xAxis = data.jointangleShoulderAddAbd;
+    xAxis = data.jointAngle_Shoulder_Abduc_Adduc;
     drawChart(shoulderAbductionAdductionGraph,xAxis,yAxis);
 
      // Elbow Flexion Extension
      yAxis = [
         {
             label: 'Flexion',
-            data: data.torqueElbowFlexion,
+            data: data.maximumJointTorque_Elbow_Flex,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
@@ -155,13 +155,13 @@ function processTorque(data={}){
         },
         {
             label: 'Extension',
-            data: data.torqueElbowExtension,
+            data: data.maximumJointTorque_Elbow_Exten,
             borderColor: 'red',
             borderWidth: 0.5,
             backgroundColor:'red',
             pointRadius: 0
         }
     ];
-    xAxis = data.jointangleElbowFlexExten;
+    xAxis = data.jointAngle_Elbow_Flex_Exten;
     drawChart(elbowFlexionExtensionGraph,xAxis,yAxis);
 }

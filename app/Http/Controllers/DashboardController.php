@@ -145,4 +145,36 @@ class DashboardController extends Controller
         }
         return view('user.velocity', ["patients" => $patients, 'user' => $user, 'fileName' => $fileName]);
     }
+
+    public function torque()
+    {
+        $patients = [];
+        $user = auth()->user();
+        if ($user->role == 'Doctor') {
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "TORQUE");
+            }])->whereHas('doctors', function (Builder $query) {
+                $query->where('doctor_id', auth()->user()->doctor->id);
+            })->get();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'TORQUE')->get();
+        }
+        if ($user->role == 'Admin') {
+            $patients = Patient::with(['trainingPaths' => function ($query) {
+                $query->where('type', "TORQUE");
+            }])->get();
+            $patient_id = [];
+            foreach ($patients as $patient) {
+                array_push($patient_id, $patient->id);
+            }
+            $fileName = TrainingPath::whereIn('patient_id', $patient_id)->where('type', 'TORQUE')->get();
+        }
+        if ($user->role == 'Patient') {
+            $fileName = TrainingPath::where('patient_id', $user->patient->id)->where('type', 'TORQUE')->get();
+        }
+        return view('user.torque', ["patients" => $patients, 'user' => $user, 'fileName' => $fileName]);
+    }
 }

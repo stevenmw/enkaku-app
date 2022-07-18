@@ -12,9 +12,10 @@ class TrainingPath extends Model
     const arus = 'ARUS';
     const kecepatan = 'KECEPATAN';
     const trayektori = 'TRAYEKTORI';
-    const arrayType = ['ARUS','KECEPATAN','TRAYEKTORI'];
+    const torque = 'TORQUE';
+    const arrayType = ['ARUS', 'KECEPATAN', 'TRAYEKTORI', 'TORQUE'];
 
-    protected $table= 'training_paths';
+    protected $table = 'training_paths';
 
     protected $fillable = [
         'patient_id',
@@ -23,6 +24,4 @@ class TrainingPath extends Model
         'path_size',
         'type',
     ];
-
-    
 }

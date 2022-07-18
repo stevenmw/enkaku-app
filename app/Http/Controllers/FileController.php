@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ArusImport;
-use App\Imports\VelocityImport;
-use App\Models\TrainingPath;
 use Carbon\Carbon;
+use App\Imports\ArusImport;
+use App\Models\TrainingPath;
 use Illuminate\Http\Request;
+use App\Imports\TorqueImport;
+use App\Imports\VelocityImport;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
@@ -21,7 +22,7 @@ class FileController extends Controller
         $request->validate([
             'patient_id' => 'required|integer',
             'file' => 'required',
-            'type' => ['required', Rule::in([TrainingPath::arus, TrainingPath::kecepatan, TrainingPath::trayektori])],
+            'type' => ['required', Rule::in([TrainingPath::arus, TrainingPath::kecepatan, TrainingPath::trayektori, TrainingPath::torque])],
         ]);
         try {
             if ($request->file('file')) {
@@ -43,6 +44,10 @@ class FileController extends Controller
 
                     case TrainingPath::kecepatan:
                         $filePath = './File/Kecepatan';
+                        break;
+
+                    case TrainingPath::torque:
+                        $filePath = './File/Torque';
                         break;
 
                     default:
@@ -94,6 +99,10 @@ class FileController extends Controller
 
                     case TrainingPath::kecepatan:
                         $filePath = './File/Kecepatan';
+                        break;
+
+                    case TrainingPath::torque:
+                        $filePath = './File/Torque';
                         break;
 
                     default:
@@ -172,6 +181,9 @@ class FileController extends Controller
         if ($request->type == TrainingPath::trayektori) {
             $data = $this->processTrayektoriFile($temp->path_name);
         }
+        if ($request->type == TrainingPath::torque) {
+            $data = $this->processTorqueFile($temp->path_name);
+        }
 
         return response()->json($data);
     }
@@ -180,7 +192,7 @@ class FileController extends Controller
     {
         $path = null;
         $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)
-        ->where('id', $request->file_name)->first();
+            ->where('id', $request->file_name)->first();
         // $temp = TrainingPath::where('patient_id', $request->patient_id)->where('type', $request->type)->first();
 
         if (!$temp) {
@@ -302,6 +314,48 @@ class FileController extends Controller
             'error' => $error,
             'realTime' => $realTime,
         ];
+    }
+
+    public function processTorqueFile($pathFile)
+    {
+        $path = Storage::path($pathFile);
+        $data = Excel::toArray(new TorqueImport, $path);
+        $data = $data[0];
+        $jointAngle_Shoulder_Flex_Exten = [];
+        $maximumJointTorque_Shoulder_Flex = [];
+        $maximumJointTorque_Shoulder_Exten = [];
+        $jointAngle_Shoulder_Abduc_Adduc = [];
+        $maximumJointTorque_Shoulder_Abduc = [];
+        $maximumJointTorque_Shoulder_Adduc = [];
+        $jointAngle_Elbow_Flex_Exten = [];
+        $maximumJointTorque_Elbow_Flex = [];
+        $maximumJointTorque_Elbow_Exten = [];
+
+        for ($i = 2; $i < count($data); $i++) {
+            array_push($jointAngle_Shoulder_Flex_Exten, $data[$i][0]);
+            array_push($maximumJointTorque_Shoulder_Flex, $data[$i][1]);
+            array_push($maximumJointTorque_Shoulder_Exten, $data[$i][2]);
+            array_push($jointAngle_Shoulder_Abduc_Adduc, $data[$i][4]);
+            array_push($maximumJointTorque_Shoulder_Abduc, $data[$i][5]);
+            array_push($maximumJointTorque_Shoulder_Adduc, $data[$i][6]);
+            array_push($jointAngle_Elbow_Flex_Exten, $data[$i][8]);
+            array_push($maximumJointTorque_Elbow_Flex, $data[$i][9]);
+            array_push($maximumJointTorque_Elbow_Exten, $data[$i][10]);
+        }
+
+        $response = [
+            'jointAngle_Shoulder_Flex_Exten' => $jointAngle_Shoulder_Flex_Exten,
+            'maximumJointTorque_Shoulder_Flex' => $maximumJointTorque_Shoulder_Flex,
+            'maximumJointTorque_Shoulder_Exten' => $maximumJointTorque_Shoulder_Exten,
+            'jointAngle_Shoulder_Abduc_Adduc' => $jointAngle_Shoulder_Abduc_Adduc,
+            'maximumJointTorque_Shoulder_Abduc' => $maximumJointTorque_Shoulder_Abduc,
+            'maximumJointTorque_Shoulder_Adduc' => $maximumJointTorque_Shoulder_Adduc,
+            'jointAngle_Elbow_Flex_Exten' => $jointAngle_Elbow_Flex_Exten,
+            'maximumJointTorque_Elbow_Flex' => $maximumJointTorque_Elbow_Flex,
+            'maximumJointTorque_Elbow_Exten' => $maximumJointTorque_Elbow_Exten,
+        ];
+
+        return $response;
     }
 
     public function replaceComa($strVar)

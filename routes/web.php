@@ -87,6 +87,7 @@ Route::get('/terms', [DashboardController::class, 'terms'])->middleware('auth');
 Route::get('/current', [DashboardController::class, 'current'])->middleware('auth');
 Route::get('/trajectory', [DashboardController::class, 'trajectory'])->middleware('auth');
 Route::get('/velocity', [DashboardController::class, 'velocity'])->middleware('auth');
+Route::get('/torque', [DashboardController::class, 'torque'])->middleware('auth');
 
 Route::post('/import-file', [FileController::class, 'import']);
 Route::post('/process-file', [FileController::class, 'processFile']);

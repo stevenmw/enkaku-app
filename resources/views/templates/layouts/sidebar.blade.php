@@ -131,6 +131,19 @@
               </li>
             </ul>
           </div>
+          <div class="collapse" id="layouts">
+            <ul class="navbar-nav ps-3">
+              <li>
+                <a href="/torque" class="nav-link px-3">
+                  <span class="me-2">
+                    {{-- <i class="bi bi-graph-down"></i> --}}
+                    <i class="bi bi-bezier2"></i>
+                  </span>
+                  <span>Torque</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
         {{-- <li>
           <a href="#" class="nav-link px-3">

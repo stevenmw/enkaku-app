@@ -111,10 +111,10 @@ function processTorque(data={}){
         },
         {
             label: 'Extension',
-            data: data.maximumJointTorque_Shoulde_Exten,
-            borderColor: 'red',
+            data: data.maximumJointTorque_Shoulder_Exten,
+            borderColor: 'green',
             borderWidth: 0.5,
-            backgroundColor:'red',
+            backgroundColor:'green',
             pointRadius: 0
         }
     ];
@@ -134,9 +134,9 @@ function processTorque(data={}){
         {
             label: 'Abduction',
             data: data.maximumJointTorque_Shoulder_Abduc,
-            borderColor: 'red',
+            borderColor: 'green',
             borderWidth: 0.5,
-            backgroundColor:'red',
+            backgroundColor:'green',
             pointRadius: 0
         }
     ];
@@ -156,9 +156,9 @@ function processTorque(data={}){
         {
             label: 'Extension',
             data: data.maximumJointTorque_Elbow_Exten,
-            borderColor: 'red',
+            borderColor: 'green',
             borderWidth: 0.5,
-            backgroundColor:'red',
+            backgroundColor:'green',
             pointRadius: 0
         }
     ];

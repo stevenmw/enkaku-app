@@ -32,7 +32,7 @@ Open the project via git bash or similar terminal
 
 ### Start the project 'php artisan serve' in terminal
 
-![alt text](https://github.com/[stevenmw]/[enkaku-app]/blob/[master]/phpartisan.png?raw=true)
+![alt text](https://github.com/stevenmw/enkaku-app/master/phpartisan.png)
 
 ## License
 

@@ -32,6 +32,8 @@ Open the project via git bash or similar terminal
 
 ### Start the project 'php artisan serve' in terminal
 
+![alt text](https://github.com/[stevenmw]/[enkaku-app]/blob/[master]/phpartisan.png?raw=true)
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
